@@ -1,0 +1,17 @@
+digraph "Inferred BN with max number of parents =1" {
+	1 [label=WRKY22]
+	2 [label=MPK4]
+	3 [label=FLS2]
+	4 [label=MKK2]
+	5 [label=PR1]
+	6 [label=MEK1]
+	7 [label=MKK4]
+	8 [label=MKK3]
+	9 [label=WRKY25]
+	6 -> 1
+	4 -> 3
+	5 -> 4
+	9 -> 6
+	9 -> 7
+	4 -> 9
+}
