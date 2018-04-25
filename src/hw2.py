@@ -412,9 +412,10 @@ if __name__ == '__main__':
 		graph =Graph(nodes, connections)# assuming that this fixed graph is not cyclic
 		#print graph.graph
 		cpt =calculate_cpt(graph, nodes, X)
+		print cpt
 		total_prob =total_prob(nodes, X)
 		#print cpt
-		best_path(graph, cpt, 5, 1, total_prob)
+		best_path(graph, cpt, 5, 0, total_prob)
 	#Y, _ =create_data(args.test_file)#testing data
 	#y =predict(Y, cpt)
 	#print "accuracy-----------"

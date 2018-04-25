@@ -141,7 +141,7 @@ def best_path(graph, cpt, reporter_node, reporter_state, total_prob):
 			heapq.heappush(vertex_set, (cost[i, 0], (i, 0)))
 			heapq.heappush(vertex_set, (cost[i, 1], (i, 1)))
 	while  vertex_set:
-		print vertex_set
+		#print vertex_set
 		next =heapq.heappop(vertex_set)[1]	
 		moves =possible_results(graph, next)
 		for move in moves:
@@ -412,9 +412,10 @@ if __name__ == '__main__':
 		graph =Graph(nodes, connections)# assuming that this fixed graph is not cyclic
 		#print graph.graph
 		cpt =calculate_cpt(graph, nodes, X)
+		print cpt
 		total_prob =total_prob(nodes, X)
 		#print cpt
-		best_path(graph, cpt, 5, 1, total_prob)
+		best_path(graph, cpt, 8, 1, total_prob)
 	#Y, _ =create_data(args.test_file)#testing data
 	#y =predict(Y, cpt)
 	#print "accuracy-----------"
