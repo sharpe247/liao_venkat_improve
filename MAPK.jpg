@@ -1,4 +1,4 @@
-digraph "Inferred BN with max number of parents =3" {
+digraph "MAPK kegg" {
 	1 [label=WRKY22]
 	2 [label=MPK4]
 	3 [label=FLS2]
@@ -8,16 +8,15 @@ digraph "Inferred BN with max number of parents =3" {
 	7 [label=MKK4]
 	8 [label=MKK3]
 	9 [label=WRKY25]
-	3 -> 1
-	1 -> 2
-	9 -> 2
-	7 -> 2
+	8 -> 1
+	4 -> 2
+	6 -> 2
 	6 -> 4
-	6 -> 5
+	1 -> 5
+	9 -> 5
 	3 -> 6
-	3 -> 7
-	5 -> 7
+	6 -> 7
 	4 -> 8
-	5 -> 8
-	7 -> 9
+	7 -> 8
+	2 -> 9
 }

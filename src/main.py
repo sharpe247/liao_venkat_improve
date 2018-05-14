@@ -216,11 +216,12 @@ if __name__ == '__main__':
 	if args.ml:
 		if args.categorical:
 			data =np.genfromtxt(args.input_file, delimiter=',', skip_header=1)
-			reporter =int(args.reporter_node)
+			reporter =int(args.reporter_node) -1
 			y =data[:, reporter]
 			comb =[i for i in range(data.shape[1]) if i !=reporter]
 			#print comb
-			output=[]
+			out_avg=[]
+			out_sd=[]
 			for i in range(1, len(comb)+1):
 				for j in combinations(comb, i):
 					mask =j
@@ -231,16 +232,28 @@ if __name__ == '__main__':
 					#print x.shape
 					x =categorical(x)#categorical one hot applied
 					#y =categorical(y)
-					X_train, X_test, Y_train, Y_test =test_train_split(x, y)
-					scores, names =classify(X_train,Y_train, X_test, Y_test)
-					scores.insert(0, mask)
-					output.append(scores)
+					average =[]
+					for k in range(10):
+						X_train, X_test, Y_train, Y_test =test_train_split(x, y)
+						scores, names =classify(X_train,Y_train, X_test, Y_test)
+						average.append(scores)
+					avg =list(np.array(np.matrix(average).mean(0))[0])
+					sd =list(np.array(np.matrix(average).std(0))[0])
+					avg.insert(0, tuple([i+1 for  i in mask]))#making the indices same as data
+					sd.insert(0, tuple([i+1 for  i in mask]))
+					out_avg.append(avg)
+					out_sd.append(sd)
 			headers =['features']
 			headers.extend(names)
-		with open(args.output_file, 'w') as f:
+		with open(args.output_file+'_avg.csv', 'w') as f:
 			writer =csv.writer(f)
 			writer.writerow(headers)
-			for row in output:
+			for row in out_avg:
+				writer.writerow(row)
+		with open(args.output_file+'_sd.csv', 'w') as f:
+			writer =csv.writer(f)
+			writer.writerow(headers)
+			for row in out_sd:
 				writer.writerow(row)
 			
 			#else:

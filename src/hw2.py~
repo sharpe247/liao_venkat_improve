@@ -403,19 +403,20 @@ if __name__ == '__main__':
 		cpt =calculate_cpt(exc_graph, nodes, X)
 		print "best cpt------"
 		print cpt
-		meu(5, cpt, graph)
+		total_prob =total_prob(nodes, X)
+		best_path(graph, cpt, 5, 1, total_prob)
 
 	if args.fixed_graph:
 		#connections for venkat  (1,5) (9,5) (8,1) (2,9) (7,8) (4,8) (4,2) (6,2) (6,7) (6,4) (3,6)
 		#to compare with venkat et all, fixing the graph
 		connections =parse_connections(args.connections)
 		graph =Graph(nodes, connections)# assuming that this fixed graph is not cyclic
-		#print graph.graph
+		print graph.graph
 		cpt =calculate_cpt(graph, nodes, X)
 		print cpt
 		total_prob =total_prob(nodes, X)
 		#print cpt
-		best_path(graph, cpt, 8, 1, total_prob)
+		best_path(graph, cpt, 5, 0, total_prob)
 	#Y, _ =create_data(args.test_file)#testing data
 	#y =predict(Y, cpt)
 	#print "accuracy-----------"

@@ -18,7 +18,9 @@ if __name__ == '__main__':
 	comment_2='Inferred BN with max number of parents =2'
 	graph_3 ={1: set([3]), 2: set([1, 7, 9]), 3: set([]), 4: set([6]), 5: set([6]), 6: set([3]), 7: set([3, 5]), 8: set([4, 5]), 9: set([7])}
 	comment_3='Inferred BN with max number of parents =3'
+	graph_4 ={1: set([8]), 2: set([4, 6]), 3: set([]), 4: set([6]), 5: set([1, 9]), 6: set([3]), 7: set([6]), 8: set([4, 7]), 9: set([2])}
+	comment_4='MAPK kegg'
 	#make_graph(graph_1, comment_1)
 	#make_graph(graph_2, comment_2)
-	make_graph(graph_3, comment_3)
+	make_graph(graph_4, comment_4)
 
