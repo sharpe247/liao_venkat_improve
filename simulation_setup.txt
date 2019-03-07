@@ -1,0 +1,41 @@
+Randomly generated network - vary the number of nodes 
+Fix the reporter node -so  in this way the reporter node location also varies
+We want to analyze the results of our method - namely if it can find the best 2,3 k node path in the network
+
+
+Studying the path utility method in isolation ie. not inferring the network from the data
+In ideal conditions assuming that the randomly generated network is the one that is used along with the path utility method
+
+Simulation conditions:
+	Best k node pathway
+	 1. In the randomly generated network find all the k node paths P-1...P_p to the reporter node.
+	2. For activation Start and the reporter node states are fixed at 1, while the others can vary S(+)....R(+)
+		For inhibition Start and the reporter node states are fixed at 0, while the others can vary S(-)....R(-) 
+		Now corresponding to each P_i path there would be multiple paths, let total number of these paths be N
+	3. Out of these N paths randomly select one path to be the best path
+		This path should be the most likely other should be less than this though in a random fashion
+		Say N=4 then  (5 is the reporter node)
+		X     P(X=x) 
+		1	0.1 			8+   1+  5+
+		2    0.2               8+   1-  5+ 
+		3    0.5   best path2+ 9+ 5+
+		4    0.2               2+   9-   5+
+	Consider this as if instead of knocking out one gene we are knocking out k-1 genes or essentially fixing the values for these k-1 genes
+	4. Generating the dataset 
+		Let the number of genes be G, then 
+		For each of the P_p paths fix the value for the k genes, the rest of the G-k gene values to be assigned randomly. 
+		For each of the remaining G-k genes pick a random number b/w 0 to 1, let that be the proportion of ones for the variable
+
+		the number of records for these P_p paths is in the ratio stated in pt 3.
+		Say 200 records total
+		100  with 5+
+		 8+   1+  5+   10 records
+		8+   1-  5+    20 records
+		2+   9+  5+    50 records
+		2+   9-  5+    10 records
+		100 with 5-   all of these in any  proportion random
+       	 8+   1+  5+   
+		8+   1-  5+    
+		2+   9+  5+    
+		2+   9-  5+    
+

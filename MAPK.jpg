@@ -1,4 +1,4 @@
-digraph "MAPK kegg" {
+digraph comment_4 {
 	1 [label=WRKY22]
 	2 [label=MPK4]
 	3 [label=FLS2]
@@ -8,15 +8,4 @@ digraph "MAPK kegg" {
 	7 [label=MKK4]
 	8 [label=MKK3]
 	9 [label=WRKY25]
-	8 -> 1
-	4 -> 2
-	6 -> 2
-	6 -> 4
-	1 -> 5
-	9 -> 5
-	3 -> 6
-	6 -> 7
-	4 -> 8
-	7 -> 8
-	2 -> 9
 }

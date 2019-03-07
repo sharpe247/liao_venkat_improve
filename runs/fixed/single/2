@@ -1,0 +1,254 @@
+Input Graph is 
+defaultdict(<type 'set'>, {1: set([9, 2, 3]), 2: set([]), 3: set([4]), 4: set([6]), 5: set([6]), 6: set([]), 7: set([]), 8: set([7]), 9: set([8, 7]), 10: set([9])})
+[['9', '1'], ['2', '1'], ['3', '1'], ['4', '3'], ['6', '4'], ['6', '5'], ['7', '8'], ['8', '9'], ['7', '9'], ['9', '10']]
+True Cpt  [[1 set([9, 2, 3]) (0, 0, 0, 0) 0.79]
+ [1 set([9, 2, 3]) (0, 0, 0, 1) 0.21]
+ [1 set([9, 2, 3]) (0, 0, 1, 0) 0.5]
+ [1 set([9, 2, 3]) (0, 0, 1, 1) 0.5]
+ [1 set([9, 2, 3]) (0, 1, 0, 0) 0.61]
+ [1 set([9, 2, 3]) (0, 1, 0, 1) 0.39]
+ [1 set([9, 2, 3]) (0, 1, 1, 0) 0.63]
+ [1 set([9, 2, 3]) (0, 1, 1, 1) 0.37]
+ [1 set([9, 2, 3]) (1, 0, 0, 0) 0.21]
+ [1 set([9, 2, 3]) (1, 0, 0, 1) 0.79]
+ [1 set([9, 2, 3]) (1, 0, 1, 0) 0.31]
+ [1 set([9, 2, 3]) (1, 0, 1, 1) 0.69]
+ [1 set([9, 2, 3]) (1, 1, 0, 0) 0.8]
+ [1 set([9, 2, 3]) (1, 1, 0, 1) 0.2]
+ [1 set([9, 2, 3]) (1, 1, 1, 0) 0.92]
+ [1 set([9, 2, 3]) (1, 1, 1, 1) 0.08]
+ [2 set([]) (0,) 0.08]
+ [2 set([]) (1,) 0.92]
+ [3 set([4]) (0, 0) 0.52]
+ [3 set([4]) (0, 1) 0.48]
+ [3 set([4]) (1, 0) 0.67]
+ [3 set([4]) (1, 1) 0.33]
+ [4 set([6]) (0, 0) 0.43]
+ [4 set([6]) (0, 1) 0.57]
+ [4 set([6]) (1, 0) 0.85]
+ [4 set([6]) (1, 1) 0.15]
+ [5 set([6]) (0, 0) 0.33]
+ [5 set([6]) (0, 1) 0.67]
+ [5 set([6]) (1, 0) 0.42]
+ [5 set([6]) (1, 1) 0.58]
+ [6 set([]) (0,) 0.17]
+ [6 set([]) (1,) 0.83]
+ [7 set([]) (0,) 0.54]
+ [7 set([]) (1,) 0.46]
+ [8 set([7]) (0, 0) 0.67]
+ [8 set([7]) (0, 1) 0.33]
+ [8 set([7]) (1, 0) 0.27]
+ [8 set([7]) (1, 1) 0.73]
+ [9 set([8, 7]) (0, 0, 0) 0.23]
+ [9 set([8, 7]) (0, 0, 1) 0.77]
+ [9 set([8, 7]) (0, 1, 0) 0.43]
+ [9 set([8, 7]) (0, 1, 1) 0.57]
+ [9 set([8, 7]) (1, 0, 0) 0.91]
+ [9 set([8, 7]) (1, 0, 1) 0.09]
+ [9 set([8, 7]) (1, 1, 0) 0.48]
+ [9 set([8, 7]) (1, 1, 1) 0.52]
+ [10 set([9]) (0, 0) 0.85]
+ [10 set([9]) (0, 1) 0.15]
+ [10 set([9]) (1, 0) 0.35]
+ [10 set([9]) (1, 1) 0.65]]
+Cpds correct according to the graph?  True
+Using variable elimination to run inference
+evidence is  {'2': 0}
+reporter state 0 has probability 0.441311078435
+reporter state 1 has probability 0.558688921565
+evidence is  {'2': 1}
+reporter state 0 has probability 0.745670439086
+reporter state 1 has probability 0.254329560914
+evidence is  {'3': 0}
+reporter state 0 has probability 0.6937403656
+reporter state 1 has probability 0.3062596344
+evidence is  {'3': 1}
+reporter state 0 has probability 0.7554725544
+reporter state 1 has probability 0.2445274456
+evidence is  {'4': 0}
+reporter state 0 has probability 0.723371816224
+reporter state 1 has probability 0.276628183776
+evidence is  {'4': 1}
+reporter state 0 has probability 0.714111987904
+reporter state 1 has probability 0.285888012096
+evidence is  {'5': 0}
+reporter state 0 has probability 0.721443726397
+reporter state 1 has probability 0.278556273603
+evidence is  {'5': 1}
+reporter state 0 has probability 0.721238726963
+reporter state 1 has probability 0.278761273037
+evidence is  {'6': 0}
+reporter state 0 has probability 0.718093714082
+reporter state 1 has probability 0.281906285918
+evidence is  {'6': 1}
+reporter state 0 has probability 0.721982841976
+reporter state 1 has probability 0.278017158024
+evidence is  {'7': 0}
+reporter state 0 has probability 0.722342742477
+reporter state 1 has probability 0.277657257523
+evidence is  {'7': 1}
+reporter state 0 has probability 0.720123063688
+reporter state 1 has probability 0.279876936312
+evidence is  {'8': 0}
+reporter state 0 has probability 0.754131640907
+reporter state 1 has probability 0.245868359093
+evidence is  {'8': 1}
+reporter state 0 has probability 0.690299052049
+reporter state 1 has probability 0.309700947951
+evidence is  {'9': 0}
+reporter state 0 has probability 0.622255408
+reporter state 1 has probability 0.377744592
+evidence is  {'9': 1}
+reporter state 0 has probability 0.805699936
+reporter state 1 has probability 0.194300064
+evidence is  {'10': 0}
+reporter state 0 has probability 0.682038537474
+reporter state 1 has probability 0.317961462526
+evidence is  {'10': 1}
+reporter state 0 has probability 0.775566067931
+reporter state 1 has probability 0.224433932069
+Evidence in decreasing order of probability are 
+{'2': 0} 0.558688921565
+{'9': 0} 0.377744592
+{'10': 0} 0.317961462526
+{'8': 1} 0.309700947951
+{'3': 0} 0.3062596344
+{'4': 1} 0.285888012096
+{'6': 0} 0.281906285918
+{'7': 1} 0.279876936312
+{'5': 1} 0.278761273037
+{'5': 0} 0.278556273603
+{'6': 1} 0.278017158024
+{'7': 0} 0.277657257523
+{'4': 0} 0.276628183776
+{'2': 1} 0.254329560914
+{'8': 0} 0.245868359093
+{'3': 1} 0.2445274456
+{'10': 1} 0.224433932069
+{'9': 1} 0.194300064
+Generating data
+1000 data points generated
+infered Cpt is  [[1 set([9, 2, 3]) (0, 0, 0, 0) 0.1511]
+ [1 set([9, 2, 3]) (0, 0, 0, 1) 0.8489]
+ [1 set([9, 2, 3]) (0, 0, 1, 0) 0.1885]
+ [1 set([9, 2, 3]) (0, 0, 1, 1) 0.8115]
+ [1 set([9, 2, 3]) (0, 1, 0, 0) 0.1279]
+ [1 set([9, 2, 3]) (0, 1, 0, 1) 0.8721]
+ [1 set([9, 2, 3]) (0, 1, 1, 0) 0.1553]
+ [1 set([9, 2, 3]) (0, 1, 1, 1) 0.8447]
+ [1 set([9, 2, 3]) (1, 0, 0, 0) 0.1977]
+ [1 set([9, 2, 3]) (1, 0, 0, 1) 0.8023]
+ [1 set([9, 2, 3]) (1, 0, 1, 0) 0.1111]
+ [1 set([9, 2, 3]) (1, 0, 1, 1) 0.8889]
+ [1 set([9, 2, 3]) (1, 1, 0, 0) 0.1026]
+ [1 set([9, 2, 3]) (1, 1, 0, 1) 0.8974]
+ [1 set([9, 2, 3]) (1, 1, 1, 0) 0.1122]
+ [1 set([9, 2, 3]) (1, 1, 1, 1) 0.8878]
+ [2 set([]) (0,) 0.558]
+ [2 set([]) (1,) 0.442]
+ [3 set([4]) (0, 0) 0.3015]
+ [3 set([4]) (0, 1) 0.6985]
+ [3 set([4]) (1, 0) 0.656]
+ [3 set([4]) (1, 1) 0.344]
+ [4 set([6]) (0, 0) 0.4598]
+ [4 set([6]) (0, 1) 0.5402]
+ [4 set([6]) (1, 0) 0.4784]
+ [4 set([6]) (1, 1) 0.5216]
+ [5 set([6]) (0, 0) 0.7764]
+ [5 set([6]) (0, 1) 0.2236]
+ [5 set([6]) (1, 0) 0.7824]
+ [5 set([6]) (1, 1) 0.2176]
+ [6 set([]) (0,) 0.398]
+ [6 set([]) (1,) 0.602]
+ [7 set([]) (0,) 0.082]
+ [7 set([]) (1,) 0.918]
+ [8 set([7]) (0, 0) 0.5488]
+ [8 set([7]) (0, 1) 0.4512]
+ [8 set([7]) (1, 0) 0.5577]
+ [8 set([7]) (1, 1) 0.4423]
+ [9 set([8, 7]) (0, 0, 0) 0.5111]
+ [9 set([8, 7]) (0, 0, 1) 0.4889]
+ [9 set([8, 7]) (0, 1, 0) 0.7129]
+ [9 set([8, 7]) (0, 1, 1) 0.2871]
+ [9 set([8, 7]) (1, 0, 0) 0.3784]
+ [9 set([8, 7]) (1, 0, 1) 0.6216]
+ [9 set([8, 7]) (1, 1, 0) 0.7463]
+ [9 set([8, 7]) (1, 1, 1) 0.2537]
+ [10 set([9]) (0, 0) 0.5617]
+ [10 set([9]) (0, 1) 0.4383]
+ [10 set([9]) (1, 0) 0.6237]
+ [10 set([9]) (1, 1) 0.3763]]
+best path
+(1, 1) 1.0
+(3, 1) 0.8721
+(9, 0) 0.8489
+(3, 0) 0.8489
+(2, 0) 0.8489
+(9, 1) 0.8115
+(2, 1) 0.8023
+(4, 0) 0.60916185
+(8, 1) 0.60518081
+(4, 1) 0.5568784
+(7, 1) 0.5044284
+(8, 0) 0.43387279
+(7, 0) 0.43387279
+(6, 0) 0.30082571168
+(6, 1) 0.29142302904
+(5, 0) 0.0
+(10, 0) 0.0
+(5, 1) 0.0
+(10, 1) 0.0
+key is (9, 0) cost is 0.8489
+(1, 1) 
+
+key is (8, 0) cost is 0.43387279
+(9, 0) (1, 1) 
+
+key is (7, 0) cost is 0.43387279
+(9, 0) (1, 1) 
+
+key is (8, 1) cost is 0.60518081
+(9, 0) (1, 1) 
+
+key is (7, 1) cost is 0.5044284
+(9, 1) (1, 1) 
+
+key is (3, 0) cost is 0.8489
+(1, 1) 
+
+key is (6, 1) cost is 0.29142302904
+(4, 0) (3, 1) (1, 1) 
+
+key is (3, 1) cost is 0.8721
+(1, 1) 
+
+key is (6, 0) cost is 0.30082571168
+(4, 1) (3, 0) (1, 1) 
+
+key is (2, 1) cost is 0.8023
+(1, 1) 
+
+key is (2, 0) cost is 0.8489
+(1, 1) 
+
+key is (5, 0) cost is 0.0
+
+
+key is (10, 0) cost is 0.0
+
+
+key is (9, 1) cost is 0.8115
+(1, 1) 
+
+key is (5, 1) cost is 0.0
+
+
+key is (10, 1) cost is 0.0
+
+
+key is (4, 1) cost is 0.5568784
+(3, 0) (1, 1) 
+
+key is (4, 0) cost is 0.60916185
+(3, 1) (1, 1) 
+

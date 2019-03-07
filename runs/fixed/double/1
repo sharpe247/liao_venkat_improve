@@ -1,0 +1,758 @@
+Input Graph is 
+defaultdict(<type 'set'>, {1: set([9, 2, 3]), 2: set([]), 3: set([4]), 4: set([6]), 5: set([6]), 6: set([]), 7: set([]), 8: set([7]), 9: set([8, 7]), 10: set([9])})
+[['9', '1'], ['2', '1'], ['3', '1'], ['4', '3'], ['6', '4'], ['6', '5'], ['7', '8'], ['8', '9'], ['7', '9'], ['9', '10']]
+True Cpt  [[1 set([9, 2, 3]) (0, 0, 0, 0) 0.5]
+ [1 set([9, 2, 3]) (0, 0, 0, 1) 0.5]
+ [1 set([9, 2, 3]) (0, 0, 1, 0) 0.88]
+ [1 set([9, 2, 3]) (0, 0, 1, 1) 0.12]
+ [1 set([9, 2, 3]) (0, 1, 0, 0) 0.71]
+ [1 set([9, 2, 3]) (0, 1, 0, 1) 0.29]
+ [1 set([9, 2, 3]) (0, 1, 1, 0) 0.84]
+ [1 set([9, 2, 3]) (0, 1, 1, 1) 0.16]
+ [1 set([9, 2, 3]) (1, 0, 0, 0) 0.85]
+ [1 set([9, 2, 3]) (1, 0, 0, 1) 0.15]
+ [1 set([9, 2, 3]) (1, 0, 1, 0) 0.84]
+ [1 set([9, 2, 3]) (1, 0, 1, 1) 0.16]
+ [1 set([9, 2, 3]) (1, 1, 0, 0) 0.85]
+ [1 set([9, 2, 3]) (1, 1, 0, 1) 0.15]
+ [1 set([9, 2, 3]) (1, 1, 1, 0) 0.61]
+ [1 set([9, 2, 3]) (1, 1, 1, 1) 0.39]
+ [2 set([]) (0,) 0.68]
+ [2 set([]) (1,) 0.32]
+ [3 set([4]) (0, 0) 0.55]
+ [3 set([4]) (0, 1) 0.45]
+ [3 set([4]) (1, 0) 1.0]
+ [3 set([4]) (1, 1) 0.0]
+ [4 set([6]) (0, 0) 0.55]
+ [4 set([6]) (0, 1) 0.45]
+ [4 set([6]) (1, 0) 0.04]
+ [4 set([6]) (1, 1) 0.96]
+ [5 set([6]) (0, 0) 0.29]
+ [5 set([6]) (0, 1) 0.71]
+ [5 set([6]) (1, 0) 0.09]
+ [5 set([6]) (1, 1) 0.91]
+ [6 set([]) (0,) 0.09]
+ [6 set([]) (1,) 0.91]
+ [7 set([]) (0,) 0.23]
+ [7 set([]) (1,) 0.77]
+ [8 set([7]) (0, 0) 0.68]
+ [8 set([7]) (0, 1) 0.32]
+ [8 set([7]) (1, 0) 0.21]
+ [8 set([7]) (1, 1) 0.79]
+ [9 set([8, 7]) (0, 0, 0) 0.05]
+ [9 set([8, 7]) (0, 0, 1) 0.95]
+ [9 set([8, 7]) (0, 1, 0) 0.25]
+ [9 set([8, 7]) (0, 1, 1) 0.75]
+ [9 set([8, 7]) (1, 0, 0) 0.97]
+ [9 set([8, 7]) (1, 0, 1) 0.03]
+ [9 set([8, 7]) (1, 1, 0) 0.69]
+ [9 set([8, 7]) (1, 1, 1) 0.31]
+ [10 set([9]) (0, 0) 0.94]
+ [10 set([9]) (0, 1) 0.06]
+ [10 set([9]) (1, 0) 0.32]
+ [10 set([9]) (1, 1) 0.68]]
+Cpds correct according to the graph?  True
+Using variable elimination to run inference
+evidence is  {'3': 0, '2': 0}
+reporter state 0 has probability 0.6612226
+reporter state 1 has probability 0.3387774
+evidence is  {'3': 1, '2': 0}
+reporter state 0 has probability 0.86157456
+reporter state 1 has probability 0.13842544
+evidence is  {'3': 0, '2': 1}
+reporter state 0 has probability 0.77448904
+reporter state 1 has probability 0.22551096
+evidence is  {'3': 1, '2': 1}
+reporter state 0 has probability 0.73405372
+reporter state 1 has probability 0.26594628
+evidence is  {'2': 0, '4': 0}
+reporter state 0 has probability 0.751380982
+reporter state 1 has probability 0.248619018
+evidence is  {'2': 0, '4': 1}
+reporter state 0 has probability 0.6612226
+reporter state 1 has probability 0.3387774
+evidence is  {'2': 1, '4': 0}
+reporter state 0 has probability 0.756293146
+reporter state 1 has probability 0.243706854
+evidence is  {'2': 1, '4': 1}
+reporter state 0 has probability 0.77448904
+reporter state 1 has probability 0.22551096
+evidence is  {'2': 0, '5': 0}
+reporter state 0 has probability 0.675940955862
+reporter state 1 has probability 0.324059044139
+evidence is  {'2': 0, '5': 1}
+reporter state 0 has probability 0.66812284953
+reporter state 1 has probability 0.33187715047
+evidence is  {'2': 1, '5': 0}
+reporter state 0 has probability 0.771518560305
+reporter state 1 has probability 0.228481439695
+evidence is  {'2': 1, '5': 1}
+reporter state 0 has probability 0.77309642174
+reporter state 1 has probability 0.22690357826
+evidence is  {'2': 0, '6': 0}
+reporter state 0 has probability 0.7108097101
+reporter state 1 has probability 0.2891902899
+evidence is  {'2': 0, '6': 1}
+reporter state 0 has probability 0.66482893528
+reporter state 1 has probability 0.33517106472
+evidence is  {'2': 1, '6': 0}
+reporter state 0 has probability 0.7644812983
+reporter state 1 has probability 0.2355187017
+evidence is  {'2': 1, '6': 1}
+reporter state 0 has probability 0.77376120424
+reporter state 1 has probability 0.22623879576
+evidence is  {'2': 0, '7': 0}
+reporter state 0 has probability 0.73426543498
+reporter state 1 has probability 0.26573456502
+evidence is  {'2': 0, '7': 1}
+reporter state 0 has probability 0.64946253892
+reporter state 1 has probability 0.35053746108
+evidence is  {'2': 1, '7': 0}
+reporter state 0 has probability 0.79743252934
+reporter state 1 has probability 0.20256747066
+evidence is  {'2': 1, '7': 1}
+reporter state 0 has probability 0.76560588436
+reporter state 1 has probability 0.23439411564
+evidence is  {'8': 0, '2': 0}
+reporter state 0 has probability 0.798816735398
+reporter state 1 has probability 0.201183264602
+evidence is  {'8': 1, '2': 0}
+reporter state 0 has probability 0.608393608276
+reporter state 1 has probability 0.391606391724
+evidence is  {'8': 0, '2': 1}
+reporter state 0 has probability 0.821658722275
+reporter state 1 has probability 0.178341277725
+evidence is  {'8': 1, '2': 1}
+reporter state 0 has probability 0.750192657501
+reporter state 1 has probability 0.249807342499
+evidence is  {'9': 0, '2': 0}
+reporter state 0 has probability 0.5146889
+reporter state 1 has probability 0.4853111
+evidence is  {'9': 1, '2': 0}
+reporter state 0 has probability 0.84961345
+reporter state 1 has probability 0.15038655
+evidence is  {'9': 0, '2': 1}
+reporter state 0 has probability 0.71502515
+reporter state 1 has probability 0.28497485
+evidence is  {'9': 1, '2': 1}
+reporter state 0 has probability 0.8407228
+reporter state 1 has probability 0.1592772
+evidence is  {'10': 0, '2': 0}
+reporter state 0 has probability 0.590129959137
+reporter state 1 has probability 0.409870040863
+evidence is  {'10': 1, '2': 0}
+reporter state 0 has probability 0.818250739238
+reporter state 1 has probability 0.181749260762
+evidence is  {'10': 0, '2': 1}
+reporter state 0 has probability 0.743338284546
+reporter state 1 has probability 0.256661715454
+evidence is  {'10': 1, '2': 1}
+reporter state 0 has probability 0.828952330978
+reporter state 1 has probability 0.171047669022
+evidence is  {'3': 0, '4': 0}
+reporter state 0 has probability 0.6974678608
+reporter state 1 has probability 0.3025321392
+evidence is  {'3': 0, '4': 1}
+reporter state 0 has probability 0.6974678608
+reporter state 1 has probability 0.3025321392
+evidence is  {'3': 1, '4': 0}
+reporter state 0 has probability 0.8207678912
+reporter state 1 has probability 0.1792321088
+evidence is  {'3': 1, '4': 1}
+reporter state 0 has probability 0.8207678912
+reporter state 1 has probability 0.1792321088
+evidence is  {'3': 0, '5': 0}
+reporter state 0 has probability 0.6974678608
+reporter state 1 has probability 0.3025321392
+evidence is  {'3': 0, '5': 1}
+reporter state 0 has probability 0.6974678608
+reporter state 1 has probability 0.3025321392
+evidence is  {'3': 1, '5': 0}
+reporter state 0 has probability 0.8207678912
+reporter state 1 has probability 0.1792321088
+evidence is  {'3': 1, '5': 1}
+reporter state 0 has probability 0.8207678912
+reporter state 1 has probability 0.1792321088
+evidence is  {'3': 0, '6': 0}
+reporter state 0 has probability 0.6974678608
+reporter state 1 has probability 0.3025321392
+evidence is  {'3': 0, '6': 1}
+reporter state 0 has probability 0.6974678608
+reporter state 1 has probability 0.3025321392
+evidence is  {'3': 1, '6': 0}
+reporter state 0 has probability 0.8207678912
+reporter state 1 has probability 0.1792321088
+evidence is  {'3': 1, '6': 1}
+reporter state 0 has probability 0.8207678912
+reporter state 1 has probability 0.1792321088
+evidence is  {'3': 0, '7': 0}
+reporter state 0 has probability 0.75260368
+reporter state 1 has probability 0.24739632
+evidence is  {'3': 0, '7': 1}
+reporter state 0 has probability 0.68099872
+reporter state 1 has probability 0.31900128
+evidence is  {'3': 1, '7': 0}
+reporter state 0 has probability 0.80111552
+reporter state 1 has probability 0.19888448
+evidence is  {'3': 1, '7': 1}
+reporter state 0 has probability 0.82663808
+reporter state 1 has probability 0.17336192
+evidence is  {'8': 0, '3': 0}
+reporter state 0 has probability 0.807108814838
+reporter state 1 has probability 0.192891185162
+evidence is  {'8': 1, '3': 0}
+reporter state 0 has probability 0.646321376741
+reporter state 1 has probability 0.353678623259
+evidence is  {'8': 0, '3': 1}
+reporter state 0 has probability 0.781687947186
+reporter state 1 has probability 0.218312052814
+evidence is  {'8': 1, '3': 1}
+reporter state 0 has probability 0.838998321161
+reporter state 1 has probability 0.161001678839
+evidence is  {'9': 0, '3': 0}
+reporter state 0 has probability 0.5672
+reporter state 1 has probability 0.4328
+evidence is  {'9': 1, '3': 0}
+reporter state 0 has probability 0.85
+reporter state 1 has probability 0.15
+evidence is  {'9': 0, '3': 1}
+reporter state 0 has probability 0.8672
+reporter state 1 has probability 0.1328
+evidence is  {'9': 1, '3': 1}
+reporter state 0 has probability 0.7664
+reporter state 1 has probability 0.2336
+evidence is  {'10': 0, '3': 0}
+reporter state 0 has probability 0.63090011253
+reporter state 1 has probability 0.36909988747
+evidence is  {'10': 1, '3': 0}
+reporter state 0 has probability 0.823518290602
+reporter state 1 has probability 0.176481709398
+evidence is  {'10': 0, '3': 1}
+reporter state 0 has probability 0.844495009395
+reporter state 1 has probability 0.155504990605
+evidence is  {'10': 1, '3': 1}
+reporter state 0 has probability 0.775839025132
+reporter state 1 has probability 0.224160974868
+evidence is  {'5': 0, '4': 0}
+reporter state 0 has probability 0.75295287448
+reporter state 1 has probability 0.24704712552
+evidence is  {'5': 1, '4': 0}
+reporter state 0 has probability 0.75295287448
+reporter state 1 has probability 0.24704712552
+evidence is  {'5': 0, '4': 1}
+reporter state 0 has probability 0.6974678608
+reporter state 1 has probability 0.3025321392
+evidence is  {'5': 1, '4': 1}
+reporter state 0 has probability 0.6974678608
+reporter state 1 has probability 0.3025321392
+evidence is  {'4': 0, '6': 0}
+reporter state 0 has probability 0.75295287448
+reporter state 1 has probability 0.24704712552
+evidence is  {'4': 0, '6': 1}
+reporter state 0 has probability 0.75295287448
+reporter state 1 has probability 0.24704712552
+evidence is  {'4': 1, '6': 0}
+reporter state 0 has probability 0.6974678608
+reporter state 1 has probability 0.3025321392
+evidence is  {'4': 1, '6': 1}
+reporter state 0 has probability 0.6974678608
+reporter state 1 has probability 0.3025321392
+evidence is  {'4': 0, '7': 0}
+reporter state 0 has probability 0.774434008
+reporter state 1 has probability 0.225565992
+evidence is  {'4': 0, '7': 1}
+reporter state 0 has probability 0.746536432
+reporter state 1 has probability 0.253463568
+evidence is  {'4': 1, '7': 0}
+reporter state 0 has probability 0.75260368
+reporter state 1 has probability 0.24739632
+evidence is  {'4': 1, '7': 1}
+reporter state 0 has probability 0.68099872
+reporter state 1 has probability 0.31900128
+evidence is  {'8': 0, '4': 0}
+reporter state 0 has probability 0.795669424395
+reporter state 1 has probability 0.204330575605
+evidence is  {'8': 1, '4': 0}
+reporter state 0 has probability 0.73302600173
+reporter state 1 has probability 0.26697399827
+evidence is  {'8': 0, '4': 1}
+reporter state 0 has probability 0.807108814838
+reporter state 1 has probability 0.192891185162
+evidence is  {'8': 1, '4': 1}
+reporter state 0 has probability 0.646321376741
+reporter state 1 has probability 0.353678623259
+evidence is  {'9': 0, '4': 0}
+reporter state 0 has probability 0.7022
+reporter state 1 has probability 0.2978
+evidence is  {'9': 1, '4': 0}
+reporter state 0 has probability 0.81238
+reporter state 1 has probability 0.18762
+evidence is  {'9': 0, '4': 1}
+reporter state 0 has probability 0.5672
+reporter state 1 has probability 0.4328
+evidence is  {'9': 1, '4': 1}
+reporter state 0 has probability 0.85
+reporter state 1 has probability 0.15
+evidence is  {'10': 0, '4': 0}
+reporter state 0 has probability 0.727017816119
+reporter state 1 has probability 0.272982183881
+evidence is  {'10': 1, '4': 0}
+reporter state 0 has probability 0.80206262114
+reporter state 1 has probability 0.19793737886
+evidence is  {'10': 0, '4': 1}
+reporter state 0 has probability 0.63090011253
+reporter state 1 has probability 0.36909988747
+evidence is  {'10': 1, '4': 1}
+reporter state 0 has probability 0.823518290602
+reporter state 1 has probability 0.176481709398
+evidence is  {'5': 0, '6': 0}
+reporter state 0 has probability 0.727984618324
+reporter state 1 has probability 0.272015381676
+evidence is  {'5': 0, '6': 1}
+reporter state 0 has probability 0.699687261347
+reporter state 1 has probability 0.300312738653
+evidence is  {'5': 1, '6': 0}
+reporter state 0 has probability 0.727984618324
+reporter state 1 has probability 0.272015381676
+evidence is  {'5': 1, '6': 1}
+reporter state 0 has probability 0.699687261347
+reporter state 1 has probability 0.300312738653
+evidence is  {'5': 0, '7': 0}
+reporter state 0 has probability 0.756167481046
+reporter state 1 has probability 0.243832518954
+evidence is  {'5': 0, '7': 1}
+reporter state 0 has probability 0.691697751484
+reporter state 1 has probability 0.308302248516
+evidence is  {'5': 1, '7': 0}
+reporter state 0 has probability 0.754274458769
+reporter state 1 has probability 0.245725541231
+evidence is  {'5': 1, '7': 1}
+reporter state 0 has probability 0.686014632624
+reporter state 1 has probability 0.313985367376
+evidence is  {'8': 0, '5': 0}
+reporter state 0 has probability 0.805241334348
+reporter state 1 has probability 0.194758665652
+evidence is  {'8': 1, '5': 0}
+reporter state 0 has probability 0.660475906771
+reporter state 1 has probability 0.339524093229
+evidence is  {'8': 0, '5': 1}
+reporter state 0 has probability 0.806233303912
+reporter state 1 has probability 0.193766696088
+evidence is  {'8': 1, '5': 1}
+reporter state 0 has probability 0.65295729383
+reporter state 1 has probability 0.34704270617
+evidence is  {'9': 0, '5': 0}
+reporter state 0 has probability 0.58923875
+reporter state 1 has probability 0.41076125
+evidence is  {'9': 1, '5': 0}
+reporter state 0 has probability 0.843858535
+reporter state 1 has probability 0.156141465
+evidence is  {'9': 0, '5': 1}
+reporter state 0 has probability 0.577532191704
+reporter state 1 has probability 0.422467808296
+evidence is  {'9': 1, '5': 1}
+reporter state 0 has probability 0.847120762578
+reporter state 1 has probability 0.152879237422
+evidence is  {'10': 0, '5': 0}
+reporter state 0 has probability 0.646591327641
+reporter state 1 has probability 0.353408672359
+evidence is  {'10': 1, '5': 0}
+reporter state 0 has probability 0.820015652562
+reporter state 1 has probability 0.179984347438
+evidence is  {'10': 0, '5': 1}
+reporter state 0 has probability 0.638256457268
+reporter state 1 has probability 0.361743542732
+evidence is  {'10': 1, '5': 1}
+reporter state 0 has probability 0.821876186231
+reporter state 1 has probability 0.178123813769
+evidence is  {'7': 0, '6': 0}
+reporter state 0 has probability 0.7646103604
+reporter state 1 has probability 0.2353896396
+evidence is  {'7': 1, '6': 0}
+reporter state 0 has probability 0.7170444616
+reporter state 1 has probability 0.2829555384
+evidence is  {'7': 0, '6': 1}
+reporter state 0 has probability 0.75347689312
+reporter state 1 has probability 0.24652310688
+evidence is  {'7': 1, '6': 1}
+reporter state 0 has probability 0.68362022848
+reporter state 1 has probability 0.31637977152
+evidence is  {'8': 0, '6': 0}
+reporter state 0 has probability 0.800817150094
+reporter state 1 has probability 0.199182849906
+evidence is  {'8': 1, '6': 0}
+reporter state 0 has probability 0.694008920485
+reporter state 1 has probability 0.305991079515
+evidence is  {'8': 0, '6': 1}
+reporter state 0 has probability 0.80665123922
+reporter state 1 has probability 0.19334876078
+evidence is  {'8': 1, '6': 1}
+reporter state 0 has probability 0.649789561741
+reporter state 1 has probability 0.350210438259
+evidence is  {'9': 0, '6': 0}
+reporter state 0 has probability 0.64145
+reporter state 1 has probability 0.35855
+evidence is  {'9': 1, '6': 0}
+reporter state 0 has probability 0.829309
+reporter state 1 has probability 0.170691
+evidence is  {'9': 0, '6': 1}
+reporter state 0 has probability 0.5726
+reporter state 1 has probability 0.4274
+evidence is  {'9': 1, '6': 1}
+reporter state 0 has probability 0.8484952
+reporter state 1 has probability 0.1515048
+evidence is  {'10': 0, '6': 0}
+reporter state 0 has probability 0.683764849504
+reporter state 1 has probability 0.316235150496
+evidence is  {'10': 1, '6': 0}
+reporter state 0 has probability 0.811717672398
+reporter state 1 has probability 0.188282327602
+evidence is  {'10': 0, '6': 1}
+reporter state 0 has probability 0.634744820673
+reporter state 1 has probability 0.365255179327
+evidence is  {'10': 1, '6': 1}
+reporter state 0 has probability 0.822660063823
+reporter state 1 has probability 0.177339936177
+evidence is  {'8': 0, '7': 0}
+reporter state 0 has probability 0.8333698449
+reporter state 1 has probability 0.1666301551
+evidence is  {'8': 1, '7': 0}
+reporter state 0 has probability 0.58683565826
+reporter state 1 has probability 0.41316434174
+evidence is  {'8': 0, '7': 1}
+reporter state 0 has probability 0.7797754565
+reporter state 1 has probability 0.2202245435
+evidence is  {'8': 1, '7': 1}
+reporter state 0 has probability 0.66186780202
+reporter state 1 has probability 0.33813219798
+evidence is  {'9': 0, '7': 0}
+reporter state 0 has probability 0.5787965
+reporter state 1 has probability 0.4212035
+evidence is  {'9': 1, '7': 0}
+reporter state 0 has probability 0.846768442
+reporter state 1 has probability 0.153231558
+evidence is  {'9': 0, '7': 1}
+reporter state 0 has probability 0.5787965
+reporter state 1 has probability 0.4212035
+evidence is  {'9': 1, '7': 1}
+reporter state 0 has probability 0.846768442
+reporter state 1 has probability 0.153231558
+evidence is  {'10': 0, '7': 0}
+reporter state 0 has probability 0.684167482696
+reporter state 1 has probability 0.315832517304
+evidence is  {'10': 1, '7': 0}
+reporter state 0 has probability 0.83489769261
+reporter state 1 has probability 0.16510230739
+evidence is  {'10': 0, '7': 1}
+reporter state 0 has probability 0.628768420875
+reporter state 1 has probability 0.371231579125
+evidence is  {'10': 1, '7': 1}
+reporter state 0 has probability 0.815722320818
+reporter state 1 has probability 0.184277679182
+evidence is  {'9': 0, '8': 0}
+reporter state 0 has probability 0.5787965
+reporter state 1 has probability 0.4212035
+evidence is  {'9': 1, '8': 0}
+reporter state 0 has probability 0.846768442
+reporter state 1 has probability 0.153231558
+evidence is  {'9': 0, '8': 1}
+reporter state 0 has probability 0.5787965
+reporter state 1 has probability 0.4212035
+evidence is  {'9': 1, '8': 1}
+reporter state 0 has probability 0.846768442
+reporter state 1 has probability 0.153231558
+evidence is  {'8': 0, '10': 0}
+reporter state 0 has probability 0.754496246862
+reporter state 1 has probability 0.245503753138
+evidence is  {'8': 0, '10': 1}
+reporter state 0 has probability 0.84260688293
+reporter state 1 has probability 0.15739311707
+evidence is  {'8': 1, '10': 0}
+reporter state 0 has probability 0.610094778
+reporter state 1 has probability 0.389905222
+evidence is  {'8': 1, '10': 1}
+reporter state 0 has probability 0.797167593881
+reporter state 1 has probability 0.202832406119
+evidence is  {'9': 0, '10': 0}
+reporter state 0 has probability 0.5787965
+reporter state 1 has probability 0.4212035
+evidence is  {'9': 0, '10': 1}
+reporter state 0 has probability 0.5787965
+reporter state 1 has probability 0.4212035
+evidence is  {'9': 1, '10': 0}
+reporter state 0 has probability 0.846768442
+reporter state 1 has probability 0.153231558
+evidence is  {'9': 1, '10': 1}
+reporter state 0 has probability 0.846768442
+reporter state 1 has probability 0.153231558
+Evidence in decreasing order of probability are 
+{'9': 0, '2': 0} 0.4853111
+{'9': 0, '4': 1} 0.4328
+{'9': 0, '3': 0} 0.4328
+{'9': 0, '6': 1} 0.4274
+{'9': 0, '5': 1} 0.422467808296
+{'9': 0, '7': 1} 0.4212035
+{'9': 0, '8': 1} 0.4212035
+{'9': 0, '10': 0} 0.4212035
+{'9': 0, '8': 0} 0.4212035
+{'9': 0, '7': 0} 0.4212035
+{'9': 0, '10': 1} 0.4212035
+{'8': 1, '7': 0} 0.41316434174
+{'9': 0, '5': 0} 0.41076125
+{'10': 0, '2': 0} 0.409870040863
+{'8': 1, '2': 0} 0.391606391724
+{'8': 1, '10': 0} 0.389905222
+{'10': 0, '7': 1} 0.371231579125
+{'10': 0, '3': 0} 0.36909988747
+{'10': 0, '4': 1} 0.36909988747
+{'10': 0, '6': 1} 0.365255179327
+{'10': 0, '5': 1} 0.361743542732
+{'9': 0, '6': 0} 0.35855
+{'8': 1, '4': 1} 0.353678623259
+{'8': 1, '3': 0} 0.353678623259
+{'10': 0, '5': 0} 0.353408672359
+{'2': 0, '7': 1} 0.35053746108
+{'8': 1, '6': 1} 0.350210438259
+{'8': 1, '5': 1} 0.34704270617
+{'8': 1, '5': 0} 0.339524093229
+{'2': 0, '4': 1} 0.3387774
+{'3': 0, '2': 0} 0.3387774
+{'8': 1, '7': 1} 0.33813219798
+{'2': 0, '6': 1} 0.33517106472
+{'2': 0, '5': 1} 0.33187715047
+{'2': 0, '5': 0} 0.324059044139
+{'3': 0, '7': 1} 0.31900128
+{'4': 1, '7': 1} 0.31900128
+{'7': 1, '6': 1} 0.31637977152
+{'10': 0, '6': 0} 0.316235150496
+{'10': 0, '7': 0} 0.315832517304
+{'5': 1, '7': 1} 0.313985367376
+{'5': 0, '7': 1} 0.308302248516
+{'8': 1, '6': 0} 0.305991079515
+{'3': 0, '5': 1} 0.3025321392
+{'3': 0, '4': 0} 0.3025321392
+{'3': 0, '4': 1} 0.3025321392
+{'3': 0, '5': 0} 0.3025321392
+{'3': 0, '6': 0} 0.3025321392
+{'3': 0, '6': 1} 0.3025321392
+{'4': 1, '6': 1} 0.3025321392
+{'4': 1, '6': 0} 0.3025321392
+{'5': 1, '4': 1} 0.3025321392
+{'5': 0, '4': 1} 0.3025321392
+{'5': 1, '6': 1} 0.300312738653
+{'5': 0, '6': 1} 0.300312738653
+{'9': 0, '4': 0} 0.2978
+{'2': 0, '6': 0} 0.2891902899
+{'9': 0, '2': 1} 0.28497485
+{'7': 1, '6': 0} 0.2829555384
+{'10': 0, '4': 0} 0.272982183881
+{'5': 1, '6': 0} 0.272015381676
+{'5': 0, '6': 0} 0.272015381676
+{'8': 1, '4': 0} 0.26697399827
+{'3': 1, '2': 1} 0.26594628
+{'2': 0, '7': 0} 0.26573456502
+{'10': 0, '2': 1} 0.256661715454
+{'4': 0, '7': 1} 0.253463568
+{'8': 1, '2': 1} 0.249807342499
+{'2': 0, '4': 0} 0.248619018
+{'4': 1, '7': 0} 0.24739632
+{'3': 0, '7': 0} 0.24739632
+{'4': 0, '6': 1} 0.24704712552
+{'4': 0, '6': 0} 0.24704712552
+{'5': 1, '4': 0} 0.24704712552
+{'5': 0, '4': 0} 0.24704712552
+{'7': 0, '6': 1} 0.24652310688
+{'5': 1, '7': 0} 0.245725541231
+{'8': 0, '10': 0} 0.245503753138
+{'5': 0, '7': 0} 0.243832518954
+{'2': 1, '4': 0} 0.243706854
+{'2': 1, '6': 0} 0.2355187017
+{'7': 0, '6': 0} 0.2353896396
+{'2': 1, '7': 1} 0.23439411564
+{'9': 1, '3': 1} 0.2336
+{'2': 1, '5': 0} 0.228481439695
+{'2': 1, '5': 1} 0.22690357826
+{'2': 1, '6': 1} 0.22623879576
+{'4': 0, '7': 0} 0.225565992
+{'3': 0, '2': 1} 0.22551096
+{'2': 1, '4': 1} 0.22551096
+{'10': 1, '3': 1} 0.224160974868
+{'8': 0, '7': 1} 0.2202245435
+{'8': 0, '3': 1} 0.218312052814
+{'8': 0, '4': 0} 0.204330575605
+{'8': 1, '10': 1} 0.202832406119
+{'2': 1, '7': 0} 0.20256747066
+{'8': 0, '2': 0} 0.201183264602
+{'8': 0, '6': 0} 0.199182849906
+{'3': 1, '7': 0} 0.19888448
+{'10': 1, '4': 0} 0.19793737886
+{'8': 0, '5': 0} 0.194758665652
+{'8': 0, '5': 1} 0.193766696088
+{'8': 0, '6': 1} 0.19334876078
+{'8': 0, '3': 0} 0.192891185162
+{'8': 0, '4': 1} 0.192891185162
+{'10': 1, '6': 0} 0.188282327602
+{'9': 1, '4': 0} 0.18762
+{'10': 1, '7': 1} 0.184277679182
+{'10': 1, '2': 0} 0.181749260762
+{'10': 1, '5': 0} 0.179984347438
+{'3': 1, '4': 1} 0.1792321088
+{'3': 1, '4': 0} 0.1792321088
+{'3': 1, '5': 0} 0.1792321088
+{'3': 1, '6': 1} 0.1792321088
+{'3': 1, '6': 0} 0.1792321088
+{'3': 1, '5': 1} 0.1792321088
+{'8': 0, '2': 1} 0.178341277725
+{'10': 1, '5': 1} 0.178123813769
+{'10': 1, '6': 1} 0.177339936177
+{'10': 1, '4': 1} 0.176481709398
+{'10': 1, '3': 0} 0.176481709398
+{'3': 1, '7': 1} 0.17336192
+{'10': 1, '2': 1} 0.171047669022
+{'9': 1, '6': 0} 0.170691
+{'8': 0, '7': 0} 0.1666301551
+{'10': 1, '7': 0} 0.16510230739
+{'8': 1, '3': 1} 0.161001678839
+{'9': 1, '2': 1} 0.1592772
+{'8': 0, '10': 1} 0.15739311707
+{'9': 1, '5': 0} 0.156141465
+{'10': 0, '3': 1} 0.155504990605
+{'9': 1, '10': 1} 0.153231558
+{'9': 1, '8': 1} 0.153231558
+{'9': 1, '8': 0} 0.153231558
+{'9': 1, '7': 1} 0.153231558
+{'9': 1, '7': 0} 0.153231558
+{'9': 1, '10': 0} 0.153231558
+{'9': 1, '5': 1} 0.152879237422
+{'9': 1, '6': 1} 0.1515048
+{'9': 1, '2': 0} 0.15038655
+{'9': 1, '4': 1} 0.15
+{'9': 1, '3': 0} 0.15
+{'3': 1, '2': 0} 0.13842544
+{'9': 0, '3': 1} 0.1328
+Generating data
+1000 data points generated
+infered Cpt is  [[1 set([9, 2, 3]) (0, 0, 0, 0) 0.058]
+ [1 set([9, 2, 3]) (0, 0, 0, 1) 0.942]
+ [1 set([9, 2, 3]) (0, 0, 1, 0) 0.125]
+ [1 set([9, 2, 3]) (0, 0, 1, 1) 0.875]
+ [1 set([9, 2, 3]) (0, 1, 0, 0) 0.0609]
+ [1 set([9, 2, 3]) (0, 1, 0, 1) 0.9391]
+ [1 set([9, 2, 3]) (0, 1, 1, 0) 0.0916]
+ [1 set([9, 2, 3]) (0, 1, 1, 1) 0.9084]
+ [1 set([9, 2, 3]) (1, 0, 0, 0) 0.1333]
+ [1 set([9, 2, 3]) (1, 0, 0, 1) 0.8667]
+ [1 set([9, 2, 3]) (1, 0, 1, 0) 0.0968]
+ [1 set([9, 2, 3]) (1, 0, 1, 1) 0.9032]
+ [1 set([9, 2, 3]) (1, 1, 0, 0) 0.0357]
+ [1 set([9, 2, 3]) (1, 1, 0, 1) 0.9643]
+ [1 set([9, 2, 3]) (1, 1, 1, 0) 0.0922]
+ [1 set([9, 2, 3]) (1, 1, 1, 1) 0.9078]
+ [2 set([]) (0,) 0.247]
+ [2 set([]) (1,) 0.753]
+ [3 set([4]) (0, 0) 0.0962]
+ [3 set([4]) (0, 1) 0.9038]
+ [3 set([4]) (1, 0) 0.5532]
+ [3 set([4]) (1, 1) 0.4468]
+ [4 set([6]) (0, 0) 0.5455]
+ [4 set([6]) (0, 1) 0.4545]
+ [4 set([6]) (1, 0) 0.5283]
+ [4 set([6]) (1, 1) 0.4717]
+ [5 set([6]) (0, 0) 0.2424]
+ [5 set([6]) (0, 1) 0.7576]
+ [5 set([6]) (1, 0) 0.0699]
+ [5 set([6]) (1, 1) 0.9301]
+ [6 set([]) (0,) 0.099]
+ [6 set([]) (1,) 0.901]
+ [7 set([]) (0,) 0.679]
+ [7 set([]) (1,) 0.321]
+ [8 set([7]) (0, 0) 0.9676]
+ [8 set([7]) (0, 1) 0.0324]
+ [8 set([7]) (1, 0) 0.9626]
+ [8 set([7]) (1, 1) 0.0374]
+ [9 set([8, 7]) (0, 0, 0) 0.6773]
+ [9 set([8, 7]) (0, 0, 1) 0.3227]
+ [9 set([8, 7]) (0, 1, 0) 0.7443]
+ [9 set([8, 7]) (0, 1, 1) 0.2557]
+ [9 set([8, 7]) (1, 0, 0) 0.9545]
+ [9 set([8, 7]) (1, 0, 1) 0.0455]
+ [9 set([8, 7]) (1, 1, 0) 0.75]
+ [9 set([8, 7]) (1, 1, 1) 0.25]
+ [10 set([9]) (0, 0) 0.5915]
+ [10 set([9]) (0, 1) 0.4085]
+ [10 set([9]) (1, 0) 0.7797]
+ [10 set([9]) (1, 1) 0.2203]]
+best path
+(1, 1) 1.0
+(9, 0) 0.942
+(3, 0) 0.942
+(2, 0) 0.942
+(3, 1) 0.9391
+(7, 1) 0.899139
+(9, 1) 0.875
+(2, 1) 0.8667
+(4, 0) 0.84875858
+(8, 1) 0.7011306
+(8, 0) 0.6380166
+(7, 0) 0.6380166
+(4, 1) 0.5211144
+(6, 0) 0.46299780539
+(6, 1) 0.448399157814
+(5, 0) 0.0
+(10, 0) 0.0
+(5, 1) 0.0
+(10, 1) 0.0
+key is (9, 0) cost is 0.942
+(1, 1) 
+
+key is (8, 0) cost is 0.6380166
+(9, 0) (1, 1) 
+
+key is (7, 0) cost is 0.6380166
+(9, 0) (1, 1) 
+
+key is (8, 1) cost is 0.7011306
+(9, 0) (1, 1) 
+
+key is (7, 1) cost is 0.899139
+(9, 0) (1, 1) 
+
+key is (3, 0) cost is 0.942
+(1, 1) 
+
+key is (6, 1) cost is 0.448399157814
+(4, 0) (3, 1) (1, 1) 
+
+key is (3, 1) cost is 0.9391
+(1, 1) 
+
+key is (6, 0) cost is 0.46299780539
+(4, 0) (3, 1) (1, 1) 
+
+key is (2, 1) cost is 0.8667
+(1, 1) 
+
+key is (2, 0) cost is 0.942
+(1, 1) 
+
+key is (5, 0) cost is 0.0
+
+
+key is (10, 0) cost is 0.0
+
+
+key is (9, 1) cost is 0.875
+(1, 1) 
+
+key is (5, 1) cost is 0.0
+
+
+key is (10, 1) cost is 0.0
+
+
+key is (4, 1) cost is 0.5211144
+(3, 0) (1, 1) 
+
+key is (4, 0) cost is 0.84875858
+(3, 1) (1, 1) 
+
