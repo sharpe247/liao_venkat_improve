@@ -21,7 +21,14 @@ import argparse
 import numpy as np
 import src.figures as figures
 import pandas as pd
+import networkx as nx
 
+from memory_profiler import profile
+
+precision = 10
+
+fp = open('memory_profiler_basic_mean.log', 'w+')
+@profile(precision=precision, stream=fp)
 
 def meu(reporter_node, cpt, graph, r_node_value=1 ):
 	reporter_node =reporter_node -1
@@ -773,30 +780,35 @@ def variable_elimination(model, reporter_node, no_evidence, nodes):
 	evidences =[]
 	probs =[]
 	for tup in combinations(other_nodes, no_evidence):
-		for val in product([0,1], repeat=no_evidence):
+		done =0
+	i	for val in product([0,1], repeat=no_evidence):
+			print 'single prob infered %d' %done
 			evidence ={i:j for i, j in zip(tup, val)}
 			evidences.append(evidence)
-			#print 'evidence is ', evidence
+			print 'evidence is ', evidence
 			inf_prob =infer.query([str(reporter_node)], evidence=evidence)[str(reporter_node)].values
 			probs.append(inf_prob)
 			#print 'reporter state 0 has probability', inf_prob[0]
 			#print 'reporter state 1 has probability', inf_prob[1]
+			done +=1
 	return probs, evidences
 
-def variable_elimination_filtered_set(model, reporter_node, no_intervention, nodes, filtered_values):
+def variable_elimination_filtered_set(model, reporter_node, no_intervention, nodes, filtered_evidences):
 	'''
-	filtered_values is a list of tuples of evidences
+	filtered_evidences is a list of tuples of evidences
 	'''
 	infer =VariableElimination(model)
 	other_nodes =[str(i) for i in nodes if i!= reporter_node]
 	evidences =[]
 	probs =[]
-	for f in filtered_evidences:
-		evidence ={f[0]:f[1]}
+	for tups in filtered_evidences:
+		evidence ={}
+		for tup in tups:
+			evidence[tup[0]] =tup[1]
 		evidences.append(evidence)
 		inf_prob =infer.query([str(reporter_node)], evidence=evidence)[str(reporter_node)].values
 		probs.append(inf_prob)
-	return probs, evidences
+	return probs, filtered_evidences
 
 
 def venkat(model, reporter_node, no_evidence, nodes):
@@ -822,6 +834,7 @@ def random_graph_adj_mat(s):
 	generate random strictly upper triangular matrix
 	this has total order hence a dag, it is possible that there are unconnected 
 	components in it. That is however under the definition of bayesian nets
+	This is biased at creating graphs with large no of connections
 	'''
 	#generate random square matrix
 	mat =np.random.randint(2, size=(s, s))
@@ -830,7 +843,25 @@ def random_graph_adj_mat(s):
 	#convert to strictly upper
 	np.fill_diagonal(mat, 0)#0 implies main diagonal
 	return mat
-
+def random_graph_networkx(s):
+	#using networkx random graph creater
+        #no of nodes is s, assuming max no of parents as 4
+        #and min as 1 so sampling for 10 nodes a no b/w [10, 40] as the no of edges on 
+        #average we expect 25 edges
+	#count =0
+	while 1:
+		lowest_no_edges =s*1
+		highest_no_edges =s*4 +1
+	        edge_count =np.random.randint(lowest_no_edges, high=highest_no_edges)
+        	G=nx.gnm_random_graph(s, edge_count, seed=None)
+		#count +=1
+		if nx.is_connected(G):
+			break
+	#G =nx.fast_gnp_random_graph(n, p,seed=None directed=True)
+        #there is still a possibility that some nodes would be unconnected
+	#print count
+        connections =[(i+1, j+1) for (i, j) in G.edges() if i <j] #increment the indices to match i<j ensures no cycles
+	return connections
 def adj_mat_to_connections(mat):
 	connections= [(r_idx+1, idx+1)for r_idx, row in enumerate(mat) for idx, i in enumerate(row) if i==1 ]
 	return connections
@@ -860,32 +891,28 @@ def utility_2_3_values(probs, evidences, model):
 		utility3[evidence_tup] =prob * (1-marginal_prob)
 	return utility2, utility3
 
-def compute_corr_ordering(probs, evidences, no_intervention, u_values, computation='add', top='all'):
+def compute_corr_ordering(probs, evidences, no_intervention, heu_dict):
 	'''
-	u_values: single intervention utility values; dict key is evidence value is prob value
+	heu_dict: heuristic intervention utility values for sets(combination of evidences) computed using single intervention utilities
+	; dict key is evidence value is prob value
 	no_intervention- no of intervention points
 	evidences - list of dicts, dict contain the evidences
-	probs- probabilites for these evidences
+	probs- probabilites for these evidences exact for set of nodes
 	'''
+	#print heu_dict
 	heu_probs =[]	
 	for prob, evidence in zip(probs, evidences):
-		if computation =='add':
-			heu_prob =0
-			for ev_tup in evidence.items():
-				heu_prob +=u_values[ev_tup]
-			heu_probs.append(heu_prob)
-		elif computation =='multiply':
-			heu_prob =1
-			for ev_tup in evidence.items():
-				heu_prob *=u_values[ev_tup]
-			heu_probs.append(heu_prob)
-	#print 'heu_probs', heu_probs
-	spearman =compute_spearman(probs, heu_probs, top)
-	kendall =compute_kendall(probs, heu_probs, top)
+		heu_probs.append(heu_dict[evidence])
+	spearman =compute_spearman(probs, heu_probs)
+	kendall =compute_kendall(probs, heu_probs)
+	if np.isnan(spearman[0]) or np.isnan(kendall[0]):
+		print  'heu_probs' ,heu_probs
+		print 'probs', probs
+		print 'evidences', evidences
 	return spearman, kendall
 
 
-def compute_spearman(order1, order2, top='all'):
+def compute_spearman(order1, order2):
 	'''
 	compute spearman rank order coeff for the 'top' elements in the orders
 	spearman can't handle ties
@@ -898,13 +925,10 @@ def compute_spearman(order1, order2, top='all'):
 	rand_array =np.random.random(len(order2))
 	order2_ties =np.lexsort((rand_array, order2))
 	order2_arg_sorted =np.argsort(order2_ties)
-	if top =='all':
-		spear =stats.spearmanr(order1_arg_sorted, order2_arg_sorted)
-	else:
-		spear =stats.spearmanr(order1_arg_sorted[0:top], order2_arg_sorted[0:top])
+	spear =stats.spearmanr(order1_arg_sorted, order2_arg_sorted)
 	return spear
 
-def compute_kendall(order1, order2,top='all'):
+def compute_kendall(order1, order2):
 	'''
 	Compute the kendall tau for the 2 orderings
 	This can handle ties: so sort the uniq array convert it to dict with elements as
@@ -915,18 +939,34 @@ def compute_kendall(order1, order2,top='all'):
 	order1_arg_sorted =[order1_dict[i] for i in order1]
 	order2_dict ={i:idx for idx, i in enumerate(np.sort(np.unique(order2)))}
 	order2_arg_sorted =[order2_dict[i] for i in order2]
-	if top =='all':
-		kendall =stats.kendalltau(order1_arg_sorted, order2_arg_sorted)
-	else:
-		kendall =stats.kendalltau(order1_arg_sorted[0:top], order2_arg_sorted[0:top])
+	kendall =stats.kendalltau(order1_arg_sorted, order2_arg_sorted)
 	return kendall
 	
-def find_top_utility(utility, top=20):
+def find_top_utility(utility, no_intervention, top=20, computation='add'):
 	'''
-	filter top items
+	filter top items: make combinations sum them sort them then filter the top ones
 	'''
-	util =sorted(utility.items() , key = lambda x: x[1])[-top:][::-1]
-	return {i[0]:i[1] for i in util}
+	if computation =='add':
+		combined =[]
+		for comb in combinations(utility.items(), no_intervention):
+			tmp_sum =0
+			tmp_element =[]
+			for i in comb:
+				tmp_sum +=i[1]
+				tmp_element.append(i[0])
+			combined.append((tuple(tmp_element), tmp_sum))
+	elif computation =='multiply':
+		combined =[]
+		for comb in combinations(utility.items(), no_intervention):
+			tmp_pdt =1
+			tmp_element =[]
+			for i in comb:
+				tmp_pdt *=i[1]
+				tmp_element.append(i[0])
+			combined.append((tuple(tmp_element), tmp_pdt))
+	combined.sort(key=lambda x: x[1])
+	filter_sorted_comb =combined[-top:][::-1]
+	return {i[0]:i[1] for i in filter_sorted_comb}
 
 
 
@@ -1191,39 +1231,43 @@ if __name__ == '__main__':
 			for i in np.argsort(venkat_probs[:, reporter_state])[::-1]:
 				print venkat_evidences[i], venkat_probs[i][reporter_state]
 	if args.multi_hypothesis:
-		#no_nodes =[i for i in range(5,101,5)]
-		no_nodes =[5,10,15]
+		no_nodes =[i for i in range(0,51,10)]
+		#no_nodes =[50]
 		graphs_per_node_count =5
 		cpts_per_graph =5
-		max_intervention_pts =3
+		max_intervention_pts =4
 		#reporter node shift per graph sqrt no_nodes
 		observations =defaultdict(list)
 		for node_count in no_nodes:#iterationg over differnt node sizes
 			#no_reporter_node_shifts =int(np.sqrt(node_count)) #no of reporter node shifts
-			no_reporter_node_shifts =1
-			print ('node count ', node_count)
+			no_reporter_node_shifts =3
+			print 'Current node count ', node_count
 			for g in range(graphs_per_node_count):#iterating for number of graphs per node size
-				print ('graph iteration ', g)
-				mat =random_graph_adj_mat(node_count)#totally ordered adj matrix 
-				connections =adj_mat_to_connections(mat) #adj list for that mat parent to child
+				print 'Current graph iteration %d out of %d' %(g, graphs_per_node_count)
+				#mat =random_graph_adj_mat(node_count)#totally ordered adj matrix 
+				#print mat
+				#connections =adj_mat_to_connections(mat) #adj list for that mat parent to child
+				connections =random_graph_networkx(node_count)
+				#connections =[(7,8), (7,9), (8,9), (9,10), (9,1), (2,1), (3,1), (4,3), (2,1), (6,4), (6,5)]
 				nodes =[i+1 for i in range(node_count)]#node indices incremented by 1 
 				nodes_str =[str(i) for i in nodes]
 				graph =Graph(nodes, connections)#generate graph
+				print 'Current graph structure'
+				print graph.graph
+				print connections
 				connections_str =[(str(i), str(j)) for i,j in connections]#convert connections to str
 				pgmpy_graph =BayesianModel()#initialize bn 
 				pgmpy_graph.add_nodes_from(nodes_str)
 				pgmpy_graph.add_edges_from(connections_str)
-				#print 'graph nodes', nodes_str
-				#print 'graph edges', connections_str
 				for c in range(cpts_per_graph):#iterating for number of cpts per graph structure
-					print('cpt iteration ', c)
+					print 'Current cpt iteration %d out %d' %(c, cpts_per_graph)
 					true_cpt =random_binary_cpt(graph, nodes)#generate random cpt
 					pgmpy_true_cpt =convert_to_pgmy_cpt(true_cpt, nodes)#incorporate this cpt into pgmpy graph
 					for row in pgmpy_true_cpt:#add cpd in pgmpy graph
 						pgmpy_graph.add_cpds(row)
 					reporter_set =set()
 					for  r in range(no_reporter_node_shifts):
-						print ('reporter shift iteration',r)
+						print 'Current reporter shift iteration %d out of %d' %(r, no_reporter_node_shifts)
 						#pick a reporter node
 						if reporter_set:#if a node has been picked before for this graph and cpt, select another
 							while 1:
@@ -1235,42 +1279,36 @@ if __name__ == '__main__':
 							reporter_node =np.random.choice(nodes)
 							reporter_set.add(reporter_node)
 						reporter_state =np.random.randint(2)#pick the reporter state
+						print 'Current reporter node is %d in state %d' %(reporter_node, reporter_state)
 						for no_intervention in range(1, max_intervention_pts+1):#compute inference values for each count of intervention pts
 							if no_intervention ==1:#compute the values these form are ground truth
+								print 'Computing Utility values when 1 intervention point is selected'
 								probs, evidences =variable_elimination(pgmpy_graph, reporter_node, no_intervention, nodes)
-								#print(probs, evidences)
 								probs =np.array(probs)
 								probs =probs[:, reporter_state]#only pick the probs for the chosen reporter state
+								probs =np.round(probs, 4)
 								utility_1 =utility1_values(probs, evidences)
 								utility_2, utility_3 =utility_2_3_values(probs, evidences, pgmpy_graph)
-								utility_1 =find_top_utility(utility_1)
-								utility_2 =find_top_utility(utility_2)
-								utility_3 =find_top_utility(utility_3)
-								print ('utility values for this iteration computed')
 							else:
-								print ('running variable elimination for no intervention pt', no_intervention)
-								#probs, evidences =variable_elimination_filtered_set(pgmpy_graph, reporter_node, no_intervention, nodes) 
-								#probs, evidences =variable_elimination(pgmpy_graph, reporter_node, no_intervention, nodes)
-								#probs =np.array(probs)
-								#probs =probs[:, reporter_state]#extract only the values for the reporter state
 								for u, u_values in {'utility_1':utility_1, 'utility_2':utility_2, 'utility_3':utility_3}.items():
-									filtered_evidences =u_values.keys()
-									probs, evidences =variable_elimination_filtered_set(pgmpy_graph, reporter_node, no_intervention, nodes, filtered_evidences)
-									probs =np.array(probs)
-									probs =probs[:, reporter_state]#extract only the values for the reporter state
-									spearman_coeff, kendall_coeff= compute_corr_ordering(probs, evidences, no_intervention, u_values, computation='add', top='all')
-									observations[(node_count, no_intervention, u, 'add', 'spearman')].append(spearman_coeff)
-									observations[(node_count, no_intervention, u, 'add', 'kendall')].append(kendall_coeff)
-									spearman_coeff, kendall_coeff= compute_corr_ordering(probs, evidences, no_intervention, u_values, computation='multiply', top='all')
-									observations[(node_count, no_intervention, u, 'multiply', 'spearman')].append(spearman_coeff)
-									observations[(node_count, no_intervention, u, 'multiply', 'kendall')].append(kendall_coeff)
+									for comp in ['add', 'multiply']:
+										print 'Finding top 20 sets of size --%d-- using single intervention for utility type --%s-- using --%s--'%(no_intervention, u, comp)
+										filtered_comb_utility =find_top_utility(u_values, no_intervention, top=20, computation=comp)
+										filtered_evidences =filtered_comb_utility.keys()
+										probs, evidences =variable_elimination_filtered_set(pgmpy_graph, reporter_node, no_intervention, nodes, filtered_evidences)
+										probs =np.array(probs)
+										probs =probs[:, reporter_state]#extract only the values for the reporter state
+										probs =np.round(probs, 4)
+										spearman_coeff, kendall_coeff= compute_corr_ordering(probs, evidences, no_intervention,filtered_comb_utility)
+										observations[(node_count, no_intervention, u, comp, 'spearman')].append(spearman_coeff)
+										observations[(node_count, no_intervention, u, comp, 'kendall')].append(kendall_coeff)
 		output =[]
 		header =['node_count', 'no_intervention_pts','utility_type', 'calculation_method', 'metric', 'average_value', 'single_no']
 		for key, observation in observations.items():
 			tmp =[]
 			tmp.extend(key)
-			avg =np.mean([o[0]for o in observation])
-			one_no =np.tan(np.mean([np.tanh(o[0]) for o in observation]))
+			avg =np.mean([0 if np.isnan(o[0]) else o[0]for o in observation])
+			one_no =np.tan(np.mean([0 if np.isnan(o[0]) else np.tanh(o[0]) for o in observation]))
 			tmp.extend([avg,one_no])
 			output.append(tmp)
 		with open('output.csv', 'w') as f:

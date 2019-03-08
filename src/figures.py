@@ -30,9 +30,9 @@ if __name__ == '__main__':
 	comment_3='Inferred BN with max number of parents =3'
 	graph_4 ={1: set([8]), 2: set([4, 6]), 3: set([]), 4: set([6]), 5: set([1, 9]), 6: set([3]), 7: set([6]), 8: set([4, 7]), 9: set([2])}
 	graph_5 ={0: set([]), 1: set([8, 10]), 2: set([17]), 3: set([0, 16, 14, 6, 17]), 4: set([10, 5]), 5: set([16]), 6: set([8, 9]), 7: set([18, 13, 15]), 8: set([15]), 9: set([12, 7]), 10: set([11, 14]), 11: set([6]), 12: set([0]), 13: set([8, 19]), 14: set([18]), 15: set([12]), 16: set([10]), 17: set([16]), 18: set([8]), 19: set([14])}
-
+	graph_random ={1: set([]), 2: set([]), 3: set([1]), 4: set([3]), 5: set([]), 6: set([1]), 7: set([1]), 8: set([4, 5, 7]), 9: set([8, 5]), 10: set([]), 11: set([5, 7]), 12: set([5]), 13: set([11, 12, 5]), 14: set([6]), 15: set([2, 12, 10, 7]), 16: set([11, 12, 5, 6]), 17: set([16, 2, 3, 12]), 18: set([16, 9, 3, 5]), 19: set([3, 7]), 20: set([10, 12])}
 	comment_4='MAPK kegg'
 	#make_graph(graph_1, comment_1)
 	#make_graph(graph_2, comment_2)
-	make_graph(graph_5, 'comment_4', '12.jpg')
+	make_graph(graph_random, 'comment_4', 'random.jpg')
 
