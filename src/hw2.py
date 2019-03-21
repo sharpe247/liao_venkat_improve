@@ -14,6 +14,7 @@ from pgmpy.factors.discrete import TabularCPD
 from pgmpy.inference import VariableElimination
 from pgmpy.sampling import BayesianModelSampling
 from pgmpy.estimators import MaximumLikelihoodEstimator
+from pgmpy.inference.EliminationOrder import WeightedMinFill
 from scipy import stats
 import csv
 import heapq
@@ -25,10 +26,10 @@ import networkx as nx
 
 from memory_profiler import profile
 
-precision = 10
+#precision = 10
 
-fp = open('memory_profiler_basic_mean.log', 'w+')
-@profile(precision=precision, stream=fp)
+#fp = open('memory_profiler_basic_mean.log', 'w+')
+#@profile(precision=precision, stream=fp)
 
 def meu(reporter_node, cpt, graph, r_node_value=1 ):
 	reporter_node =reporter_node -1
@@ -775,18 +776,22 @@ def normal(sd):
 	return np.random.normal(loc=0 , scale=sd)			
 
 def variable_elimination(model, reporter_node, no_evidence, nodes):
+	elimination_order =WeightedMinFill(model).get_elimination_order(model.nodes())
+	#print elimination_order
+	#print min_fill_order(model)
 	infer =VariableElimination(model)
 	other_nodes =[str(i) for i in nodes if i!= reporter_node]
 	evidences =[]
 	probs =[]
 	for tup in combinations(other_nodes, no_evidence):
 		done =0
-	i	for val in product([0,1], repeat=no_evidence):
+		for val in product([0,1], repeat=no_evidence):
 			print 'single prob infered %d' %done
 			evidence ={i:j for i, j in zip(tup, val)}
 			evidences.append(evidence)
 			print 'evidence is ', evidence
-			inf_prob =infer.query([str(reporter_node)], evidence=evidence)[str(reporter_node)].values
+			print [i for i in elimination_order if i not in evidence and i !=str(reporter_node)]
+			inf_prob =infer.query([str(reporter_node)], evidence=evidence,elimination_order =[i for i in elimination_order if i not in evidence and i !=str(reporter_node)])[str(reporter_node)].values
 			probs.append(inf_prob)
 			#print 'reporter state 0 has probability', inf_prob[0]
 			#print 'reporter state 1 has probability', inf_prob[1]
@@ -797,6 +802,7 @@ def variable_elimination_filtered_set(model, reporter_node, no_intervention, nod
 	'''
 	filtered_evidences is a list of tuples of evidences
 	'''
+	elimination_order =WeightedMinFill(model).get_elimination_order(model.nodes())
 	infer =VariableElimination(model)
 	other_nodes =[str(i) for i in nodes if i!= reporter_node]
 	evidences =[]
@@ -806,7 +812,7 @@ def variable_elimination_filtered_set(model, reporter_node, no_intervention, nod
 		for tup in tups:
 			evidence[tup[0]] =tup[1]
 		evidences.append(evidence)
-		inf_prob =infer.query([str(reporter_node)], evidence=evidence)[str(reporter_node)].values
+		inf_prob =infer.query([str(reporter_node)], evidence=evidence,elimination_order=[i for i in elimination_order if i not in evidence and i !=str(reporter_node)])[str(reporter_node)].values
 		probs.append(inf_prob)
 	return probs, filtered_evidences
 
@@ -968,7 +974,15 @@ def find_top_utility(utility, no_intervention, top=20, computation='add'):
 	filter_sorted_comb =combined[-top:][::-1]
 	return {i[0]:i[1] for i in filter_sorted_comb}
 
-
+def min_fill_order(model):
+	nodes =model.nodes()
+	edges =model.edges()
+	node_order ={}
+	for node in nodes:
+		prospective_nodes =[n for tup in edges if node in tup for n in tup if n !=node]
+		node_order[node] =sum([1 for i in combinations(prospective_nodes,2) if i not in edges])
+	order = [node for node, count in sorted(node_order.items(), key=lambda x: x[1])]
+	return order
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
@@ -988,6 +1002,8 @@ if __name__ == '__main__':
 	parser.add_argument('--reporter_state')
 	parser.add_argument('--infer_graph', action='store_true')
 	parser.add_argument('--multi_hypothesis', action='store_true')
+	parser.add_argument('--output_file')
+	parser.add_argument('--max_nodes')
 	args = parser.parse_args()
 
 
@@ -1231,7 +1247,8 @@ if __name__ == '__main__':
 			for i in np.argsort(venkat_probs[:, reporter_state])[::-1]:
 				print venkat_evidences[i], venkat_probs[i][reporter_state]
 	if args.multi_hypothesis:
-		no_nodes =[i for i in range(0,51,10)]
+		no_nodes = [int(args.max_nodes)]
+		#no_nodes =[i for i in range(5,51,5)]
 		#no_nodes =[50]
 		graphs_per_node_count =5
 		cpts_per_graph =5
@@ -1311,7 +1328,7 @@ if __name__ == '__main__':
 			one_no =np.tan(np.mean([0 if np.isnan(o[0]) else np.tanh(o[0]) for o in observation]))
 			tmp.extend([avg,one_no])
 			output.append(tmp)
-		with open('output.csv', 'w') as f:
+		with open(args.output_file, 'w') as f:
 			writer =csv.writer(f)
 			writer.writerow(header)
 			writer.writerows(output)
