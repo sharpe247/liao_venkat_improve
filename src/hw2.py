@@ -15,6 +15,7 @@ from pgmpy.inference import VariableElimination
 from pgmpy.sampling import BayesianModelSampling
 from pgmpy.estimators import MaximumLikelihoodEstimator
 from pgmpy.inference.EliminationOrder import WeightedMinFill
+from pgmpy.factors.discrete import State
 from scipy import stats
 import csv
 import heapq
@@ -798,6 +799,54 @@ def variable_elimination(model, reporter_node, no_evidence, nodes):
 			done +=1
 	return probs, evidences
 
+def likelihood_sampling(model, reporter_node, no_evidence, nodes):
+	#elimination_order =WeightedMinFill(model).get_elimination_order(model.nodes())
+	#print elimination_order
+	#print min_fill_order(model)
+	infer =BayesianModelSampling(model)
+	other_nodes =[str(i) for i in nodes if i!= reporter_node]
+	evidences =[]
+	probs =[]
+	for tup in combinations(other_nodes, no_evidence):
+		done =0
+		for val in product([0,1], repeat=no_evidence):
+			print 'single prob infered %d' %done
+			evidence ={i:j for i, j in zip(tup, val)}
+			state_evidence =[State(i,j) for i, j in zip(tup, val)]
+			evidences.append(evidence)
+			print 'evidence is ', evidence
+			#print [i for i in elimination_order if i not in evidence and i !=str(reporter_node)]
+			#inf_prob =infer.query([str(reporter_node)], evidence=evidence,elimination_order =[i for i in elimination_order if i not in evidence and i !=str(reporter_node)])[str(reporter_node)].values
+			inf_samples =infer.likelihood_weighted_sample(evidence=state_evidence, size=1000, return_type='recarray')
+			var, vals =[], []
+			for ev in state_evidence:
+				var.append(int(ev[0]))
+				vals.append(ev[1])
+			prob_0_num, prob_1_num, den =0,0,0
+			for sample in inf_samples:
+				check =0
+				check =sum([1 for idx, v in enumerate(var) if sample[v] ==vals[idx]])
+				if check ==len(var):
+					den +=sample[-1] #the weight
+					if sample[reporter_node -1] ==1:
+						prob_1_num +=sample[-1]
+					else:
+						prob_0_num +=sample[-1]
+			if den ==0:
+				prob_0, prob_1 =0,0
+			else:
+				prob_0, prob_1 =float(prob_0_num)/den, float(prob_1_num)/den
+			probs.append([prob_0, prob_1])
+
+			#probs.append(inf_prob)
+			#print 'reporter state 0 has probability', inf_prob[0]
+			#print 'reporter state 1 has probability', inf_prob[1]
+			done +=1
+	return probs, evidences
+
+
+
+
 def variable_elimination_filtered_set(model, reporter_node, no_intervention, nodes, filtered_evidences):
 	'''
 	filtered_evidences is a list of tuples of evidences
@@ -815,6 +864,44 @@ def variable_elimination_filtered_set(model, reporter_node, no_intervention, nod
 		inf_prob =infer.query([str(reporter_node)], evidence=evidence,elimination_order=[i for i in elimination_order if i not in evidence and i !=str(reporter_node)])[str(reporter_node)].values
 		probs.append(inf_prob)
 	return probs, filtered_evidences
+def likelihood_sampling_filtered_set(model, reporter_node, no_intervention, nodes, filtered_evidences):
+	'''
+	filtered_evidences is a list of tuples of evidences
+	'''
+	infer =BayesianModelSampling(model)
+	#infer =VariableElimination(model)
+	other_nodes =[str(i) for i in nodes if i!= reporter_node]
+	evidences =[]
+	probs =[]
+	for tups in filtered_evidences:
+		state_evidence =[State(tup[0], tup[1]) for tup in tups]
+		evidence ={}
+		for tup in tups:
+			evidence[tup[0]] =tup[1]
+		evidences.append(evidence)
+		inf_samples =infer.likelihood_weighted_sample(evidence=state_evidence, size=1000, return_type='recarray')
+		#inf_prob =infer.query([str(reporter_node)], evidence=evidence,elimination_order=[i for i in elimination_order if i not in evidence and i !=str(reporter_node)])[str(reporter_node)].values
+		var, vals =[], []
+		for ev in state_evidence:
+			var.append(int(ev[0]))
+			vals.append(ev[1])
+		prob_0_num, prob_1_num, den =0,0,0
+		for sample in inf_samples:
+			check =0
+			check =sum([1 for idx, v in enumerate(var) if sample[v] ==vals[idx]])
+			if check ==len(var):
+				den +=sample[-1]
+				if sample[reporter_node -1] ==1:
+					prob_1_num +=sample[-1]
+				else:
+					prob_0_num +=sample[-1]
+		if den ==0:
+			prob_0, prob_1 =0,0
+		else:
+			prob_0, prob_1 =float(prob_0_num)/den, float(prob_1_num)/den	
+		probs.append([prob_0, prob_1])
+	return probs, filtered_evidences
+
 
 
 def venkat(model, reporter_node, no_evidence, nodes):
@@ -883,18 +970,71 @@ def utility1_values(probs, evidences):
 		utility1[evidence_tup] =prob
 	return utility1
 
-def utility_2_3_values(probs, evidences, model):
+def utility_2_3_values(probs, evidences, model, likelihood=True):
 	'''
 	utility2 P(R=1|X=x). P(X=x), use this probability computation for utility--single intervention
 	utiltiy3 P(R=1|X=x).(1-P(X=x)), use this probability computation for utility--single intervention
 	'''
-	infer =VariableElimination(model)
+	if likelihood:
+		infer =BayesianModelSampling(model)
+	else:
+		infer =VariableElimination(model)
 	utility2, utility3 ={}, {}
 	for prob, evidence in zip(probs, evidences):
 		evidence_tup =evidence.items()[0]#there is only one evidence
-		marginal_prob =infer.query([str(evidence.keys()[0])])[str(evidence.keys()[0])].values[evidence.values()[0]]
+		state_evidence =[State(evidence_tup[0], evidence_tup(1))]
+		if likelihood:
+			inf_samples =infer.likelihood_weighted_sample(evidence=state_evidence_tup, size=1000, return_type='recarray')
+			prob_0_num, prob_1_num, den =0,0,0
+			for sample in inf_samples:
+				den +=sample[-1]
+				if sample[e -1] ==1:
+					prob_1_num +=sample[-1]
+				else:
+					prob_0_num +=sample[-1]
+                	if den ==0:
+                        	prob_0, prob_1 =0,0
+              		else:
+                        	prob_0, prob_1 =float(prob_0_num)/den, float(prob_1_num)/den
+ 				
+		else:
+			marginal_prob =infer.query([str(evidence.keys()[0])])[str(evidence.keys()[0])].values[evidence.values()[0]]
 		utility2[evidence_tup] =prob * marginal_prob
 		utility3[evidence_tup] =prob * (1-marginal_prob)
+    for tups in filtered_evidences:
+                state_evidence =[State(tup[0], tup[1]) for tup in tups]
+                evidence ={}
+                for tup in tups:
+                        evidence[tup[0]] =tup[1]
+                evidences.append(evidence)
+
+                inf_samples =infer.likelihood_weighted_sample(evidence=state_evidence, size=1000, return_type='recarray')
+
+
+                #inf_prob =infer.query([str(reporter_node)], evidence=evidence,elimination_order=[i for i in elimination_order if i not in evidence and i !=str(reporter_node)])[str(reporter_node)].values
+                var, vals =[], []
+                for ev in state_evidence:
+                        var.append(int(ev[0]))
+                        vals.append(ev[1])
+                prob_0_num, prob_1_num, den =0,0,0
+                for sample in inf_samples:
+                        check =0
+                        check =sum([1 for idx, v in enumerate(var) if sample[v] ==vals[idx]])
+                        if check ==len(var):
+                                den +=sample[-1]
+                                if sample[reporter_node -1] ==1:
+                                        prob_1_num +=sample[-1]
+                                else:
+                                        prob_0_num +=sample[-1]
+                if den ==0:
+                        prob_0, prob_1 =0,0
+                else:
+                        prob_0, prob_1 =float(prob_0_num)/den, float(prob_1_num)/den
+                probs.append([prob_0, prob_1])
+        return probs, filtered_evidences
+
+
+
 	return utility2, utility3
 
 def compute_corr_ordering(probs, evidences, no_intervention, heu_dict):
@@ -1004,6 +1144,7 @@ if __name__ == '__main__':
 	parser.add_argument('--multi_hypothesis', action='store_true')
 	parser.add_argument('--output_file')
 	parser.add_argument('--max_nodes')
+	parser.add_argument('--likelihood_sampling', action ='store_true')
 	args = parser.parse_args()
 
 
@@ -1300,7 +1441,10 @@ if __name__ == '__main__':
 						for no_intervention in range(1, max_intervention_pts+1):#compute inference values for each count of intervention pts
 							if no_intervention ==1:#compute the values these form are ground truth
 								print 'Computing Utility values when 1 intervention point is selected'
-								probs, evidences =variable_elimination(pgmpy_graph, reporter_node, no_intervention, nodes)
+								if args.likelihood_sampling:
+									probs, evidences =likelihood_sampling(pgmpy_graph, reporter_node, no_intervention, nodes)
+								else:
+									probs, evidences =variable_elimination(pgmpy_graph, reporter_node, no_intervention, nodes)
 								probs =np.array(probs)
 								probs =probs[:, reporter_state]#only pick the probs for the chosen reporter state
 								probs =np.round(probs, 4)
@@ -1312,7 +1456,10 @@ if __name__ == '__main__':
 										print 'Finding top 20 sets of size --%d-- using single intervention for utility type --%s-- using --%s--'%(no_intervention, u, comp)
 										filtered_comb_utility =find_top_utility(u_values, no_intervention, top=20, computation=comp)
 										filtered_evidences =filtered_comb_utility.keys()
-										probs, evidences =variable_elimination_filtered_set(pgmpy_graph, reporter_node, no_intervention, nodes, filtered_evidences)
+										if args.likelihood_sampling:
+											probs, evidences =likelihood_sampling_filtered_set(pgmpy_graph, reporter_node, no_intervention, nodes, filtered_evidences)
+										else:
+											probs, evidences =variable_elimination_filtered_set(pgmpy_graph, reporter_node, no_intervention, nodes, filtered_evidences)
 										probs =np.array(probs)
 										probs =probs[:, reporter_state]#extract only the values for the reporter state
 										probs =np.round(probs, 4)
