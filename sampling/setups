@@ -8,11 +8,14 @@ no of intervention pts 4
 2. Node count 10
 3. Node count 15
 4. Node count 20
-5  25
-6. 30
-7. 35
-8. 40
-9. 45
-10. 50
+5  Node count 25
+6. Node count 30
+7. Node count 35
+8. Node count 40
+9. Node count 45
+10. Node count 50
 
-
+Gibbs Sampling repeat the above experiments
+Write a parser to export the datastrucutures to json objects
+Write code to generate figures
+Write localized matching for correlations

@@ -1,0 +1,87 @@
+Current node count  15
+Iteration 0 out of 60
+Current graph iteration 0 out of 10
+Current cpt iteration 0 out 2
+Current reporter shift iteration 0 out of 3
+Current reporter node is 3 in state 1
+Computing Utility values when 1 intervention point is selected
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_1-- using --add--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_1-- using --multiply--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_2-- using --add--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_2-- using --multiply--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_3-- using --add--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_3-- using --multiply--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_1-- using --add--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_1-- using --multiply--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_2-- using --add--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_2-- using --multiply--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_3-- using --add--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_3-- using --multiply--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_1-- using --add--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_1-- using --multiply--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_2-- using --add--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_2-- using --multiply--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_3-- using --add--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_3-- using --multiply--
+Current reporter shift iteration 1 out of 3
+Current reporter node is 8 in state 0
+Computing Utility values when 1 intervention point is selected
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_1-- using --add--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_1-- using --multiply--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_2-- using --add--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_2-- using --multiply--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_3-- using --add--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_3-- using --multiply--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_1-- using --add--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_1-- using --multiply--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_2-- using --add--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_2-- using --multiply--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_3-- using --add--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_3-- using --multiply--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_1-- using --add--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_1-- using --multiply--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_2-- using --add--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_2-- using --multiply--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_3-- using --add--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_3-- using --multiply--
+Current reporter shift iteration 2 out of 3
+Current reporter node is 12 in state 0
+Computing Utility values when 1 intervention point is selected
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_1-- using --add--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_1-- using --multiply--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_2-- using --add--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_2-- using --multiply--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_3-- using --add--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_3-- using --multiply--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_1-- using --add--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_1-- using --multiply--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_2-- using --add--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_2-- using --multiply--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_3-- using --add--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_3-- using --multiply--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_1-- using --add--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_1-- using --multiply--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_2-- using --add--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_2-- using --multiply--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_3-- using --add--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_3-- using --multiply--
+Current cpt iteration 1 out 2
+Current reporter shift iteration 0 out of 3
+Current reporter node is 8 in state 1
+Computing Utility values when 1 intervention point is selected
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_1-- using --add--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_1-- using --multiply--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_2-- using --add--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_2-- using --multiply--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_3-- using --add--
+Finding top 20 sets of size --2-- using single intervention for utility type --utility_3-- using --multiply--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_1-- using --add--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_1-- using --multiply--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_2-- using --add--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_2-- using --multiply--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_3-- using --add--
+Finding top 20 sets of size --3-- using single intervention for utility type --utility_3-- using --multiply--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_1-- using --add--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_1-- using --multiply--
+Finding top 20 sets of size --4-- using single intervention for utility type --utility_2-- using --add--
+Finding top 20 sets of size --4-- using single interven
