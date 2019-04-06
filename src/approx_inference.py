@@ -1,8 +1,7 @@
 from src.graph import Graph
 from config.settings import *
 from copy import deepcopy
-from itertools import combinations
-from itertools import product
+from itertools import combinations, product, cycle
 from collections import Counter
 from collections import defaultdict
 from Queue import Queue
@@ -693,18 +692,27 @@ if __name__ == '__main__':
 		for k, values in utility_calc.items():
 			utility_calc[k]	=np.mean(values)
 	
+		line_labels =[tup for tup in product(utility_types, calculation)]
+		markers =cycle(('o', '^' ,'s','+', 'x', '*'))
 		charts =[]
 		for no_intervention in no_intervention_pts:
 			lines =[]
-			for i, j in zip(utility_types, calculation):
+			for tup  in line_labels:
+				i, j =tup
 				x, y =[], []
 				for node_count in node_range:
 					x.append(node_count)
-					y.append(utility_calc[(str(no_intervention), node_count, i, j)])
+					y.append(utility_calc[(no_intervention, node_count, i, j)])
 				lines.append([x, y])
 			charts.append(lines)
 
-		for x, y in charts[0]:
-			plt.plot(x, y)
-
-		plt.show()
+		for c, chart in enumerate(charts):
+			for idx, values  in enumerate(chart):
+				x, y =values
+				plt.plot(x, y, marker=markers.next(), label =line_labels[idx])
+			plt.title(str(no_intervention_pts[c])+ ' intervention pts\n' +'Correlation b/w heuristics & Inference(Likelihood Sampling)')
+			plt.xlabel('Number of nodes')
+			plt.ylabel('Kendall Tau (Average computed using tanh)')
+			plt.legend(loc='upper right')
+			plt.savefig(args.output_folder+'kendall_single_'+str(no_intervention_pts[c])+'_pts'.png)
+			#plt.show()
