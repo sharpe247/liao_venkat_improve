@@ -25,7 +25,8 @@ import src.figures as figures
 import pandas as pd
 import networkx as nx
 import cPickle as pickle
-
+import matplotlib.pyplot as plt
+import re
 #cpt functions
 def random_binary_cpt(graph, nodes):
 	'''	
@@ -451,6 +452,8 @@ if __name__ == '__main__':
 	parser.add_argument('--likelihood_samples')
 	parser.add_argument('--test_computation', action='store_true')
 	parser.add_argument('--output_folder')
+	parser.add_argument('--sampling_figures',action='store_true')
+	parser.add_argument('--node_files')
 	args = parser.parse_args()
 
 
@@ -656,3 +659,52 @@ if __name__ == '__main__':
 			print('Mean difference %f'%np.mean(errs))
 			print('Max absolute difference %f'%np.amax(np.absolute(errs)))
 			print('Std deviation  %f'%np.std(errs))
+
+
+	if args.sampling_figures:
+		'''
+		For a particular number of intervention points, find the best heuristic 
+		ie. utility_type & calculation type in terms of metrics(average or single no)
+		'''
+		node_files =[i.strip(' \t') for i in re.split(r'\s+', args.node_files)]
+		data =[]
+		for node_file in node_files:
+			with open(node_file, 'r') as f:
+				reader =csv.DictReader(f)
+				for row in reader:
+					data.append(row)
+		
+		#using kendall single as the metric
+		#six lines in each chart corresponding to the combinations of the metrics utility type and calculation type
+		node_range, utility_types, calculation, no_intervention_pts =set(), set(), set(), set()
+		utility_calc =defaultdict(list)
+		for row in data:
+			if row['metric'] =='kendall':
+				#storing mean values
+				utility_calc[(int(row['no_intervention_pts']), int(row['node_count']), row['utility_type'], row['calculation_method'])].append(round(float(row['single_no']),2))
+				node_range.add(int(row['node_count']))
+				utility_types.add(row['utility_type'])
+				calculation.add(row['calculation_method'])
+				no_intervention_pts.add(int(row['no_intervention_pts']))
+		node_range =sorted(list(node_range))
+		utility_types =list(utility_types)
+		calculation =list(calculation)
+		no_intervention_pts =sorted(list(no_intervention_pts))
+		for k, values in utility_calc.items():
+			utility_calc[k]	=np.mean(values)
+	
+		charts =[]
+		for no_intervention in no_intervention_pts:
+			lines =[]
+			for i, j in zip(utility_types, calculation):
+				x, y =[], []
+				for node_count in node_range:
+					x.append(node_count)
+					y.append(utility_calc[(str(no_intervention), node_count, i, j)])
+				lines.append([x, y])
+			charts.append(lines)
+
+		for x, y in charts[0]:
+			plt.plot(x, y)
+
+		plt.show()
