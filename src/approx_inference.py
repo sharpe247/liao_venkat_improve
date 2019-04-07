@@ -715,5 +715,5 @@ if __name__ == '__main__':
 			plt.xlabel('Number of nodes')
 			plt.ylabel('Kendall Tau (Average computed using tanh)')
 			plt.legend(loc='upper right')
-			#plt.savefig(args.output_folder+'kendall_single_'+str(no_intervention_pts[c])+'_pts.png')
+			plt.savefig(args.output_folder+'kendall_single_'+str(no_intervention_pts[c])+'_pts.png')
 			#plt.show()
