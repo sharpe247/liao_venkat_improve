@@ -24,6 +24,8 @@ import src.figures as figures
 import pandas as pd
 import networkx as nx
 import cPickle as pickle
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import re
 #cpt functions
@@ -714,5 +716,5 @@ if __name__ == '__main__':
 			plt.xlabel('Number of nodes')
 			plt.ylabel('Kendall Tau (Average computed using tanh)')
 			plt.legend(loc='upper right')
-			plt.savefig(args.output_folder+'kendall_single_'+str(no_intervention_pts[c])+'_pts'.png)
+			plt.savefig(args.output_folder+'kendall_single_'+str(no_intervention_pts[c])+'_pts.png')
 			#plt.show()
