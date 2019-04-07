@@ -693,7 +693,6 @@ if __name__ == '__main__':
 		no_intervention_pts =sorted(list(no_intervention_pts))
 		for k, values in utility_calc.items():
 			utility_calc[k]	=np.mean(values)
-	
 		line_labels =[tup for tup in product(utility_types, calculation)]
 		markers =cycle(('o', '^' ,'s','+', 'x', '*'))
 		charts =[]
@@ -707,8 +706,8 @@ if __name__ == '__main__':
 					y.append(utility_calc[(no_intervention, node_count, i, j)])
 				lines.append([x, y])
 			charts.append(lines)
-
 		for c, chart in enumerate(charts):
+			plt.figure()
 			for idx, values  in enumerate(chart):
 				x, y =values
 				plt.plot(x, y, marker=markers.next(), label =line_labels[idx])
@@ -716,5 +715,5 @@ if __name__ == '__main__':
 			plt.xlabel('Number of nodes')
 			plt.ylabel('Kendall Tau (Average computed using tanh)')
 			plt.legend(loc='upper right')
-			plt.savefig(args.output_folder+'kendall_single_'+str(no_intervention_pts[c])+'_pts.png')
+			#plt.savefig(args.output_folder+'kendall_single_'+str(no_intervention_pts[c])+'_pts.png')
 			#plt.show()
